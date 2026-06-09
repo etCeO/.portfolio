@@ -1,903 +1,1043 @@
-<!DOCTYPE html> <!-- HTML structure for my Data Science Portfolio website -->
-<html lang="en"> <!-- sets the language to English -->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ethan Ernesto Lopez | Data Science Portfolio</title> <!-- page title -->
-    <style>
-        /* =========================
-           Root Theme Variables
-        ========================= */
-        html {
-            scroll-behavior: smooth;
-        }        
-        :root {
-            --primary: #0f172a;     /* deep slate */
-            --accent: #2563eb;      /* modern blue */
-            --bg: #f8fafc;          /* light neutral */
-            --text: #1e293b;
-            --muted: #64748b;
-            --card: #ffffff;
-            --border: #e2e8f0;
-        
-            --radius: 8px;
-            --spacing: 1rem;
-            --transition: 0.2s ease;
-        }
-        
-        /* =========================
-           Global Styles
-        ========================= */
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                         Roboto, Inter, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-        }
-        
-        /* =========================
-           Header
-        ========================= */
-        header {
-            background: var(--primary);
-            color: white;
-            padding: 3rem 1rem;
-            text-align: center;
-            border-bottom: 1px solid #1e293b;
-        }
-        
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.5px;
-        }
-        
-        header p {
-            font-size: 1.1rem;
-            color: #94a3b8;
-        }
-        
-        /* =========================
-           Navigation
-        ========================= */
-        nav {
-            background: #020617;
-            padding: 0.8rem;
-            text-align: center;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        nav a {
-            color: #cbd5f5;
-            margin: 0 0.75rem;
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: var(--transition);
-        }
-        
-        nav a:hover {
-            color: var(--accent);
-        }
-        
-        /* =========================
-           Sections
-        ========================= */
-        section {
-            max-width: 1000px;
-            margin: 2.5rem auto;
-            padding: 1.5rem 1.5rem;
-            
-            background: #f1f5f9;          /* darker light gray */
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            scroll-margin-top: 80px;
-        }        
-        h2 {
-            font-size: 1.5rem;
-            margin-bottom: 1.2rem;
-            color: var(--primary);
-            
-            padding-bottom: 0.4rem;
-            border-bottom: 2px solid #bfdbfe; /* light blue line */
-        }   
-        section + section {
-            margin-top: 2rem;
-        }        
-        /* =========================
-           Cards (Projects)
-        ========================= */
-        .btn {
-            display: inline-block;
-            padding: 10px 16px;
-            background-color: #007BFF;
-            color: white;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            background: linear-gradient(135deg, #007BFF, #00C6FF);
-            border-radius: 8px;
-            font-weight: 500;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);        
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethan Ernesto Lopez | Portfolio Website</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b1120;
+  --surface: #111827;
+  --surface-2: #1f2937;
+  --border: rgba(99,179,237,0.12);
+  --border-hover: rgba(99,179,237,0.28);
+  --accent: #60a5fa;
+  --accent-2: #4fd1c5;
+  --accent-dim: rgba(99,179,237,0.08);
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #4a5568;
+  --green: #68d391;
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+  --radius: 6px;
+  --radius-lg: 10px;
+}
 
-        /* Hover effect */
-        .btn:hover {
-            background-color: #0056b3;
-            transform: translateY(-1px);
-        }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        /* Click effect */
-        .btn:active {
-            transform: translateY(0);
-        }        
-        .card {
-            background: var(--card);
-            padding: 1.4rem;
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
-            transition: var(--transition);
-            font-family: inherit;
-        }
-        
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-        }
-        
-        .card a {
-            display: inline-block;
-            font-weight: 500;
-            display: inline-block;
-            margin-top: 10px;
-            padding: 8px 12px;
-            border-radius: 6px;
-            text-decoration: none;
-            background-color: #007BFF;
-            color: white;
-            font-size: 0.9rem;
-            text-align: left;
-        }        
-        
-        /* =========================
-           Projects Grid
-        ========================= */
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.2rem;
-        }
-        .project-category {
-            margin-bottom: 3rem;
-        }
+html { scroll-behavior: smooth; }
 
-        .project-category h3 {
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-            border-left: 4px solid #007BFF;
-            padding-left: 10px;
-        }        
-        /* =========================
-           Skill Tags
-        ========================= */
-        .project-skills {
-            margin-bottom: 0.8rem;
-        }
-        
-        .project-skills span {
-            display: inline-block;
-            background: #eff6ff;
-            color: #1d4ed8;
-            padding: 0.3rem 0.6rem;
-            border-radius: 6px;
-            margin: 0.2rem;
-            font-size: 0.75rem;
-            font-weight: 500;
-            border: 1px solid #dbeafe;
-        }
-        
-        /* Main skills section */
-        .skills span {
-            display: inline-block;
-            background: #f1f5f9;
-            color: var(--text);
-            padding: 0.35rem 0.7rem;
-            border-radius: 6px;
-            margin: 0.25rem;
-            font-size: 0.8rem;
-            border: 1px solid var(--border);
-        }
-        
-        /* =========================
-           Profile Picture
-        ========================= */
-        .profile-pic {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: top center; /* 👈 key line */
-            border: 3px solid var(--border);
-            margin-bottom: 1rem;
-        }        
-        /* =========================
-           Forms
-        ========================= */
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-        
-        input, textarea {
-            padding: 0.65rem;
-            border-radius: 6px;
-            border: 1px solid var(--border);
-            font-size: 0.95rem;
-            background: white;
-            transition: var(--transition);
-        }
-        
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
-        }
-        /* Ensure ALL form elements match site typography */
-        input,
-        textarea,
-        button {
-            font-family: inherit;
-            font-size: 0.95rem;
-            color: var(--text);
-        }        
-        /* =========================
-           Buttons
-        ========================= */
-        button {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 0.7rem;
-            font-size: 0.95rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-        
-        button:hover {
-            background: #1d4ed8;
-        }
-        
-        /* =========================
-           Footer
-        ========================= */
-        footer {
-            background: #020617;
-            color: #94a3b8;
-            text-align: center;
-            padding: 1.5rem;
-            margin-top: 3rem;
-            font-size: 0.9rem;
-        }
-        
-        /* =========================
-           Links
-        ========================= */
-        a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-        }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.7;
+  min-height: 100vh;
+  body {
+  background:
+    radial-gradient(circle at top,
+      rgba(99,179,237,.08),
+      transparent 45%),
+    #0b1120;
+    }  
+    background-size: 40px 40px;
+}
 
-        #contact h3 {
-            font-size: 1.2rem;
-            margin-top: 1rem;
-            margin-bottom: 0.75rem;
-            color: var(--primary);
-        }        
-        </style>
-    </head> 
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 99px; }
+
+/* ── SELECTION ── */
+::selection { background: rgba(99,179,237,0.2); color: var(--text); }
+
+/* ── HEADER ── */
+header {
+  padding: 5rem 1.5rem 4rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: -80px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(ellipse, rgba(99,179,237,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.profile-pic {
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+  border: 1.5px solid var(--border-hover);
+  margin-bottom: 1.5rem;
+  filter: grayscale(20%);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header h1 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  color: #fff;
+  margin-bottom: 0.6rem;
+}
+
+.header-role {
+  font-size: 0.8rem;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.8rem;
+}
+
+h1,
+h2,
+.exp-title,
+.project-card h3 {
+    font-family: var(--sans);
+}
+
+header p.subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 300;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  background: var(--green);
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(104,211,145,0.5); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 5px rgba(104,211,145,0); }
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(8,12,20,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.1rem;
+}
+
+nav a {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius);
+  letter-spacing: 0.06em;
+  transition: color 0.2s, background 0.2s;
+}
+nav a:hover {
+  color: var(--accent);
+  background: var(--accent-dim);
+  text-decoration: none;
+}
+
+/* ── LAYOUT ── */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+section {
+  padding: 3.5rem 0;
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: 70px;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── SECTION HEADINGS ── */
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  max-width: 80px;
+}
+
+h2 {
+  font-family: var(--mono);
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 1.8rem;
+}
+
+/* ── ABOUT ── */
+.about-text {
+  font-size: 1.0rem;
+  color: var(--text);
+  font-weight: 300;
+  max-width: 720px;
+  line-height: 1.85;
+  border-left: 2px solid var(--accent);
+  padding-left: 1.2rem;
+}
+
+/* ── EXPERIENCE CARDS ── */
+.exp-list { display: flex; flex-direction: column; gap: 1px; }
+
+.exp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem 1.6rem;
+  transition: border-color 0.2s, background 0.2s;
+  margin-bottom: 10px;
+}
+.exp-card:hover {
+  border-color: var(--border-hover);
+  background: var(--surface-2);
+}
+
+.exp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.exp-title {
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.4;
+}
+
+.exp-title span {
+  color: var(--accent);
+}
+
+.exp-date {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+  padding-top: 2px;
+}
+
+.exp-card ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.exp-card ul li {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  padding-left: 1rem;
+  position: relative;
+}
+.exp-card ul li::before {
+  content: '▸';
+  position: absolute; left: 0;
+  color: var(--accent);
+  font-size: 0.75rem;
+  top: 3px;
+}
+
+.linkedin-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  margin-top: 1.2rem;
+  transition: color 0.2s;
+}
+.linkedin-link:hover { color: var(--accent); text-decoration: none; }
+
+/* ── PROJECTS ── */
+.section-intro {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  margin-bottom: 2rem;
+  max-width: 620px;
+}
+
+section {
+    padding: 5rem 0;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: border-color 0.2s, transform 0.2s, background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.project-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  background: var(--surface-2);
+}
+.project-card:hover::before { opacity: 1; }
+
+.project-card h3 {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.45;
+}
+
+.project-card p {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.65;
+  flex: 1;
+}
+
+.project-card {
+    padding: 1.75rem;
+}
+
+/* ── TAGS ── */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.tag {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  background: rgba(99,179,237,0.08);
+  color: var(--accent);
+  border: 1px solid rgba(99,179,237,0.18);
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
+}
+
+/* ── BUTTONS ── */
+.btn {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid rgba(99,179,237,0.3);
+  padding: 5px 12px;
+  border-radius: var(--radius);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  width: fit-content;
+  letter-spacing: 0.03em;
+}
+.btn::after { content: '↗'; font-size: 0.7rem; }
+.btn:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* ── SKILLS ── */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.skill-tag {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: var(--radius);
+  transition: border-color 0.2s, color 0.2s;
+}
+.skill-tag:hover {
+  border-color: var(--border-hover);
+  color: var(--text);
+}
+
+/* ── RESUME ── */
+.resume-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.resume-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  max-width: 480px;
+}
+
+.resume-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  background: var(--accent);
+  color: var(--bg);
+  text-decoration: none;
+  padding: 8px 18px;
+  border-radius: var(--radius);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s, transform 0.2s;
+  display: inline-block;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); text-decoration: none; color: var(--bg); }
+
+/* ── EDUCATION ── */
+.edu-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.6rem;
+}
+.edu-card .school {
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 0.2rem;
+}
+.edu-card .degree {
+  font-size: 0.88rem;
+  color: var(--accent);
+  font-family: var(--mono);
+  margin-bottom: 0.5rem;
+}
+.edu-card .meta {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+.edu-card .coursework-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+.coursework-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.coursework-tag {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 3px 10px;
+  border-radius: var(--radius);
+  font-family: var(--mono);
+}
+
+/* ── ARCHIVE ── */
+details summary {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--accent);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  user-select: none;
+  list-style: none;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before {
+  content: '▶';
+  font-size: 0.7rem;
+  transition: transform 0.2s;
+}
+details[open] summary::before { transform: rotate(90deg); }
+details summary:hover { color: #fff; }
+
+/* ── CONTACT ── */
+.contact-top {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+  line-height: 1.8;
+}
+.contact-links {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+.contact-link {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  padding: 7px 16px;
+  border-radius: var(--radius);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.contact-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-dim);
+  text-decoration: none;
+}
+
+.form-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.8rem 0;
+}
+.form-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: block;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 560px;
+}
+input, textarea {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.7rem 0.9rem;
+  font-size: 0.88rem;
+  font-family: var(--sans);
+  color: var(--text);
+  transition: border-color 0.2s;
+  width: 100%;
+}
+input::placeholder, textarea::placeholder { color: var(--text-dim); }
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--border-hover);
+}
+button[type="submit"] {
+  background: transparent;
+  border: 1px solid rgba(99,179,237,0.3);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  padding: 8px 20px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  width: fit-content;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  letter-spacing: 0.05em;
+}
+button[type="submit"]:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+}
+
+/* ── FADE ANIMATION ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+header { animation: fadeIn 0.7s ease forwards; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .exp-header { flex-direction: column; gap: 0.3rem; }
+  .resume-card { flex-direction: column; }
+  nav a { font-size: 0.68rem; padding: 0.3rem 0.5rem; }
+}
+</style>
+</head>
 <body>
 
-    <header>
-        <img 
-            src="ethanelopez04@gmail.com-3.jpg" 
-            alt="Ethan E. Lopez LinkedIn Profile Photo" 
-            class="profile-pic"
-        />
-        <h1>Ethan Ernesto Lopez</h1> <!-- main heading with my name -->
-        <p>Data Science Undergraduate • Analytics • Machine Learning • Data-Driven Storytelling</p> <!-- subheading with my focus areas -->
-    </header>
-    
-    <nav> <!-- navigation bar with links to different sections of my portfolio -->
-        <a href="#about">About</a>
-        <a href="#featured">Featured</a>
-        <a href="#experience">Experience</a>
-        <a href="#education">Education</a>
-        <a href="#resume">Resume</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
-    
-<section id="about">
-    <h2>About Me</h2> <!-- section heading for main summary -->
-    <div class="card">
-        <p>
-            I’m a Data Science student at Chapman University with a genuine interest in understanding data and its relation to human behavior. Whether that be understanding the social networks of STEM students or analyzing millions of online booking records, what draws me into the field isn’t just the technical challenge, but the potential to transform data into meaningful insights that influence industry decisions.</p>
-        <p>Through my experiences in research, machine learning, and teaching others these concepts, I've learned that the most impactful solutions are the ones that are clear and collaborative. While working extensively with statistical models, cleaning large datasets, and designing visualizations, the balance between algorithm depth and communication continues to be something I emphasize and deeply care about.</p>
-        <p>  I enjoy working across the full data science pipeline. From data collection and preprocessing to modeling and visualization, I frequently use tools like Python, Excel, and R build practical, efficient solutions that don’t just work well in theory but have a scalable, measurable impact.      </p>
-    </div>
-</section>
+<header>
+  <img src="ethanelopez04@gmail.com-3.jpg" alt="Ethan E. Lopez" class="profile-pic">
+  <div class="header-role">Data Science Graduate</div>
+  <h1>Ethan Ernesto Lopez</h1>
+  <p class="subtitle"><span class="status-dot"></span>Machine Learning · Business Intelligence · Statistical Analysis</p>
+</header>
 
-<section id="featured"> <!-- section heading for featured projects and highlights -->
-    <h2>Featured</h2>
-    <div class="card"> <!-- card with links to LinkedIn posts -->
-        <ul>
-            <a href="https://www.linkedin.com/posts/ethan-e-lopez_chapmanuniversity-fowlerschoolofengineering-activity-7423521428009984000-S6e3?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEsGmggBJUHxmTFJ8XTgk0EUE_bb6E9W2Lc" target="_blank" class="btn">
-            Robotics Project Experience
-            </a>
-        </ul>
-        <ul>
-            <a href="https://www.linkedin.com/posts/ethan-e-lopez-1a06642b1_datascience-chapmanuniversity-hci-activity-7415116254774169600-BVmk?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEsGmggBJUHxmTFJ8XTgk0EUE_bb6E9W2Lc" target="_blank" class="btn">
-            Fall '25 Semester Highlights
-            </a>
-        </ul>
-        <ul>
-            <a href="https://www.linkedin.com/posts/ethan-e-lopez-1a06642b1_happy-new-year-everyone-it-activity-7415104270225776642-4t-R?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEsGmggBJUHxmTFJ8XTgk0EUE_bb6E9W2Lc" target="_blank" class="btn">
-            Summer '25 Semester Highlights
-            </a>
-        </ul>
-        <ul>
-            <a href="https://www.linkedin.com/posts/ethan-e-lopez-1a06642b1_these-past-three-semesters-i-had-the-pleasure-activity-7336955720073961472-2_7a?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEsGmggBJUHxmTFJ8XTgk0EUE_bb6E9W2Lc" target="_blank" class="btn">
-            ProGach App Development Experience
-        </a>
-        </ul>
-    </div>
-</section>
+<nav>
+  <a href="#about">about</a>
+  <a href="#experience">experience</a>
+  <a href="#data-science">data science</a>
+  <a href="#technology">technology</a>
+  <a href="#skills">skills</a>
+  <a href="#resume">resume</a>
+  <a href="#education">education</a>
+  <a href="#archive">archive</a>
+  <a href="#contact">contact</a>
+</nav>
 
-<section id="experience"> <!-- section heading for professional experience -->
+<div class="container">
+
+  <section id="about">
+    <div class="section-label">01 // about</div>
+    <h2>About Me</h2>
+    <p class="about-text">I recently graduated with a B.S. in Data Science from Chapman University, where I developed a passion for combining statistical analysis, machine learning, and behavioral research to solve complex problems. My work focuses on uncovering patterns that help organizations make better decisions, improve collaboration, and turn data into actionable insight.</p>
+  </section>
+
+  <section id="experience">
+    <div class="section-label">02 // experience</div>
     <h2>Professional Experience</h2>
+    <div class="exp-list">
 
-    <div class="card">
-        <p><strong>Research Assistant – Social Network Analysis (MR-QAP) • Chapman University</strong><br>Mar 2026 – Present</p>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-title">Research Assistant — <span>Social Network Analysis (MR-QAP)</span><br>Chapman University</div>
+          <div class="exp-date">Mar 2026 – Present</div>
+        </div>
         <ul>
-            <li>Analyze how algorithmic student grouping impacts collaboration and classroom dynamics.</li>
-            <li>Manage datasets, applying Python and MR-QAP with key social network metrics.</li>
-            <li>Create reproducible workflows, contributing to research reports and publications.</li>
+          <li>Conducting social network and statistical analyses on datasets from 240+ STEM students to evaluate how algorithm-driven team formation impacts collaboration and persistence.</li>
+          <li>Applying Python, ANOVA, post-hoc testing, and MR-QAP methodologies to uncover factors explaining over 64% of observed team formation outcomes.</li>
+          <li>Contributing to ongoing research at the intersection of data science, educational technology, and human behavior.</li>
         </ul>
-    </div>
-    
-    <div class="card">
-        <p><strong>Academic Tutor • Chapman University</strong><br>Sep 2024 – Present</p>
-        <ul>
-            <li>Guide students through analytics, statistics, and programming concepts in Python and R.</li>
-            <li>Explain regression modeling, classification techniques, and ML pipelines.</li>
-            <li>Tailor learning approaches to individual needs, improving student outcomes.</li>
-        </ul>
-    </div>
+      </div>
 
-    <div class="card">
-        <p><strong>Data Entry & Administrative Assistant • Chapman University</strong><br>Jun 2025 – Aug 2025</p>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-title">Academic Tutor<br>Chapman University</div>
+          <div class="exp-date">Sep 2024 – May 2026</div>
+        </div>
         <ul>
-            <li><strong>Student Assistant – Office of Accreditation & Assessment</strong></li>
-            <li>Managed and cleaned datasets of 50+ student records for analysis and reporting.</li>
-            <li>Analyzed Qualtrics survey data and produced visual reports for stakeholders.</li>
-            <li>Improved data delivery by creating dashboards and automating Excel workflows.</li>
+          <li>Mentored university students in statistics, data science, mathematics, and programming, helping learners develop stronger analytical and technical problem-solving skills.</li>
+          <li>Delivered instruction in Python, R, machine learning, regression modeling, and hypothesis testing through personalized one-on-one support.</li>
+          <li>Fostered student confidence by adapting explanations to diverse learning styles and experience levels.</li>
         </ul>
-    </div>
+      </div>
 
-    <div class="card">
-        <p><strong>Teaching Assistant – Arduino Smart Car Workshops • Chapman University</strong><br>Jun 2025 – Jul 2025</p>
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-title">Student Assistant — <span>Office of Accreditation & Assessment</span><br>Chapman University</div>
+          <div class="exp-date">Jun 2025 – Aug 2025</div>
+        </div>
         <ul>
-            <li><strong>Summer Engineering Academy Employee – Arduino Cars</strong></li>
-            <li>Supported robotics hardware construction and troubleshooting.</li>
-            <li>Provided technical programming assistance using Arduino IDE.</li>
-            <li>Supervised experiments and evaluated outcomes for program effectiveness.</li>
+          <li>Organized, cleaned, and maintained institutional datasets supporting accreditation metrics and university-wide assessment initiatives.</li>
+          <li>Transformed Qualtrics survey data into visual reports and stakeholder-facing summaries to support data-informed decision making.</li>
+          <li>Streamlined reporting workflows through Excel automation, improving efficiency and consistency across assessment processes.</li>
         </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-title">Teaching Assistant — <span>Summer Engineering Academy (Arduino Cars)</span><br>Chapman University</div>
+          <div class="exp-date">Jun 2025 – Jul 2025</div>
+        </div>
+        <ul>
+          <li>Supported hands-on engineering workshops by guiding students through robotics construction, programming, and troubleshooting activities.</li>
+          <li>Assisted with Arduino development, sensor integration, and hardware testing while reinforcing engineering best practices.</li>
+          <li>Helped create an engaging STEM learning environment that encouraged experimentation and technical curiosity.</li>
+        </ul>
+      </div>
+
     </div>
-    <a href="https://www.linkedin.com/in/ethan-e-lopez" target="_blank">
-        For volunteer and non-technical experiences, please visit my LinkedIn 
+    <a href="https://www.linkedin.com/in/ethan-e-lopez" target="_blank" class="linkedin-link">
+      ↗ View additional experience on LinkedIn (including Senior Leadership Instructor at UTO Taekwondo)
     </a>
-</section>
+  </section>
 
-<section id="education"> <!-- section heading for educational background -->
-    <h2>Education</h2>
-    <div class="card"> 
-        <p><strong>Chapman University</strong> — Orange, CA</p>
-        <p>B.S. in Data Science, Minor: Business Administration<br>
-        GPA: 3.89 | Expected Graduation: May 2026</p>
-        <p><strong>Relevant Coursework:</strong></p>
-        <p>Applied Business Analytics, Machine Learning, Data Structures & Algorithms, Database Management, Business Statistics, Data Networks & Communications, Statistical Models in Business Analytics, Human-Computer Interaction, Artificial Intelligence</p>
-    </div>
-</section>
+  <section id="data-science">
+    <div class="section-label">03 // projects</div>
+    <h2>Data Science &amp; Analytics</h2>
+    <p class="section-intro">Machine learning, statistical analysis, research, business intelligence, and data-driven decision making.</p>
 
-<section id="skills">
-    <h2>Technical Skills</h2> <!-- section heading for technical skills -->
-    <div class="card">
-        <h3>Languages & Tools</h3>
-        <div class="skills"> <!-- skill tags for programming languages and tools -->
-            <span>Python</span><span>R</span><span>SQL</span><span>Excel</span><span>NumPy</span>
-            <span>Pandas</span><span>Scikit-Learn</span><span>Matplotlib</span><span>Docker</span><span>Linux</span>
-            <span>GitHub</span><span>C++</span><span>Swift</span><span>Figma</span><span>Arduino IDE</span>
-            <span>Java</span><span>Unix Commands</span><span>GUI</span><span>Tableau</span><span>HTML</span>
-            <span>Alteryx Cloud</span><span>CSS</span><span>Terminal</span><span>Dyplr</span><span>MySql</span>
-            <span>C</span><span>JavaScript</span><span>C#</span><span>Jupyter Notebooks</span><span>Google Colab</span>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <h3>Algorithm-Driven Student Team Formation Research</h3>
+        <p>Analyzed team formation outcomes from 240+ STEM students using ANOVA, post-hoc testing, Social Network Analysis, and MR-QAP to investigate how communication diversity influences team persistence and collaboration.</p>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">MR-QAP</span><span class="tag">SNA</span><span class="tag">ANOVA</span><span class="tag">Behavioral Analytics</span>
         </div>
-    </div>
-</section>
+        <a href="https://docs.google.com/presentation/d/1TAfVt2ADanOz2d5-gLyW1b-VvWHWD-37OMm6tZi5Qe0/edit?usp=sharing" class="btn" target="_blank">Research Poster</a>
+      </div>
 
-<section id="resume"> <!-- section heading for resume and downloadable PDF link -->
+      <div class="project-card">
+        <h3>Predicting Physical Activity From Wearable Health Metrics</h3>
+        <p>Built an end-to-end ML pipeline using Fitbit and Apple Watch data, evaluating six classification algorithms and achieving a ROC-AUC of 0.92.</p>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">Scikit-Learn</span><span class="tag">Cross Validation</span><span class="tag">Feature Engineering</span>
+        </div>
+        <a href="https://github.com/etCeO/.MLProject393" class="btn" target="_blank">View Project</a>
+      </div>
+
+      <div class="project-card">
+        <h3>Spotify Tune Success Analytics Dashboard</h3>
+        <p>Investigated 130,000+ Spotify songs using Tableau, statistical testing, and exploratory analysis to identify audio features associated with highly popular tracks.</p>
+        <div class="tags">
+          <span class="tag">Tableau</span><span class="tag">ANOVA</span><span class="tag">Alteryx</span><span class="tag">EDA</span><span class="tag">BI</span>
+        </div>
+        <a href="https://docs.google.com/presentation/d/11QKP6w5Z6HEqFs5aIx6rv0oF_78_BAwMg6op_rSNWy4/edit?usp=sharing" class="btn" target="_blank">View Results</a>
+      </div>
+
+      <div class="project-card">
+        <h3>Statistical Models Capstone</h3>
+        <p>Processed and modeled over 9 million booking records using clustering, classification, and regression techniques to uncover customer segments and behavioral trends.</p>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">Clustering</span><span class="tag">Big Data</span><span class="tag">Feature Engineering</span>
+        </div>
+        <a href="https://docs.google.com/presentation/d/1kIDVIE7pJMG85N4BTISj4br00xd0yBhFSfypMXSVWmM/edit?usp=sharing" class="btn" target="_blank">View Presentation</a>
+      </div>
+
+      <div class="project-card">
+        <h3>Metabolic Impact of Long-Acting Contraceptives</h3>
+        <p>Conducted a biostatistics follow-up study examining metabolic outcomes across treatment groups using ANOVA, hypothesis testing, and R programming.</p>
+        <div class="tags">
+          <span class="tag">R</span><span class="tag">Biostatistics</span><span class="tag">ANOVA</span><span class="tag">Research Design</span>
+        </div>
+        <a href="https://docs.google.com/document/d/1jVEyKsZ-vbdBRCI2esvFQax5g_OktwCeEgSorAHSdj4/edit?usp=sharing" class="btn" target="_blank">Research Paper</a>
+      </div>
+
+      <div class="project-card">
+        <h3>College Placement Analysis</h3>
+        <p>Analyzed 10,000 student records using regression, clustering, and dimensionality reduction to identify factors associated with academic success and retention.</p>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">Statistical Learning</span><span class="tag">Clustering</span><span class="tag">Regression</span>
+        </div>
+        <a href="https://docs.google.com/presentation/d/1B_nop3aA-1DpjGAnqLCbx2D9OI-p9o2_CH8BxWSZkhI/edit?usp=sharing" class="btn" target="_blank">View Analysis</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="technology">
+    <div class="section-label">04 // projects</div>
+    <h2>Technology &amp; Product Development</h2>
+    <p class="section-intro">Software engineering, systems development, product design, user experience, and technical problem solving.</p>
+
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <h3>UTO Taekwondo Digital Platform Redesign <span style="font-size:0.7rem; color: var(--accent-2); font-family: var(--mono); margin-left: 6px;">in progress</span></h3>
+        <p>Leading the redesign of a real-world organizational website, improving user experience, appointment scheduling workflows, mobile responsiveness, and long-term scalability.</p>
+        <div class="tags">
+          <span class="tag">UX Design</span><span class="tag">Web Dev</span><span class="tag">Product Design</span><span class="tag">Usability Testing</span>
+        </div>
+        <a href="https://www.utotaekwondo.com/" class="btn" target="_blank">View Website</a>
+      </div>
+
+      <div class="project-card">
+        <h3>WorkLens Collaboration Analytics Platform</h3>
+        <p>Designed an HCI-focused project management application supporting team accountability, contribution visibility, peer evaluations, and instructor oversight.</p>
+        <div class="tags">
+          <span class="tag">HCI</span><span class="tag">Figma</span><span class="tag">CSCW</span><span class="tag">User Research</span>
+        </div>
+        <a href="https://docs.google.com/presentation/d/1gC2Pm6z2RVVFVhxVpnBhrtGHMdyL9NRzcKimDFg581c/edit?usp=sharing" class="btn" target="_blank">View Prototype</a>
+      </div>
+
+      <div class="project-card">
+        <h3>Blockchain Node Constructor</h3>
+        <p>Developed a lightweight database framework in C++ supporting structured storage, querying, ingestion, and scalable system design.</p>
+        <div class="tags">
+          <span class="tag">C++</span><span class="tag">Database Systems</span><span class="tag">Systems Programming</span>
+        </div>
+        <a href="https://github.com/etCeO/.BlkChnLdgrCpp" class="btn" target="_blank">View Repository</a>
+      </div>
+
+      <div class="project-card">
+        <h3>Intelligent Warehouse Navigation</h3>
+        <p>Implemented A*, Weighted A*, and Uniform Cost Search algorithms to optimize pathfinding for autonomous warehouse agents.</p>
+        <div class="tags">
+          <span class="tag">AI</span><span class="tag">A*</span><span class="tag">Search Algorithms</span><span class="tag">Python</span>
+        </div>
+        <a href="https://github.com/etCeO/.AIWrHsNvgtnPy" class="btn" target="_blank">View Project</a>
+      </div>
+
+      <div class="project-card">
+        <h3>NED Robot Tic-Tac-Toe Automation</h3>
+        <p>Developed an autonomous robotics application using Python, computer vision, color detection, and motion planning to execute a complete Tic-Tac-Toe game.</p>
+        <div class="tags">
+          <span class="tag">Robotics</span><span class="tag">Computer Vision</span><span class="tag">Python</span><span class="tag">HSV Detection</span>
+        </div>
+        <a href="https://www.linkedin.com/posts/ethan-e-lopez_chapmanuniversity-fowlerschoolofengineering-activity-7423521428009984000-S6e3" class="btn" target="_blank">View Demo</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-label">05 // skills</div>
+    <h2>Technical Skills</h2>
+    <div class="skills-grid">
+      <span class="skill-tag">Python</span><span class="skill-tag">R</span><span class="skill-tag">SQL</span>
+      <span class="skill-tag">Excel</span><span class="skill-tag">NumPy</span><span class="skill-tag">Pandas</span>
+      <span class="skill-tag">Scikit-Learn</span><span class="skill-tag">Matplotlib</span><span class="skill-tag">Tableau</span>
+      <span class="skill-tag">Docker</span><span class="skill-tag">Linux</span><span class="skill-tag">GitHub</span>
+      <span class="skill-tag">C++</span><span class="skill-tag">Swift</span><span class="skill-tag">Java</span>
+      <span class="skill-tag">C#</span><span class="skill-tag">C</span><span class="skill-tag">JavaScript</span>
+      <span class="skill-tag">HTML/CSS</span><span class="skill-tag">Figma</span><span class="skill-tag">Arduino IDE</span>
+      <span class="skill-tag">Alteryx Cloud</span><span class="skill-tag">MySQL</span><span class="skill-tag">Jupyter</span>
+      <span class="skill-tag">Google Colab</span><span class="skill-tag">Unix</span><span class="skill-tag">Dplyr</span>
+    </div>
+  </section>
+
+  <section id="resume">
+    <div class="section-label">06 // resume</div>
     <h2>Resume</h2>
-    <div class="card">
-        <p>
-            View or download my resume for a detailed overview of my education,
-            experience, and technical skills.
-        </p>
-        <a 
-            href="Ethan_E_Lopez_Resume.pdf" 
-            target="_blank" class="btn"
-            style="font-weight: bold; font-size: 1.05rem;"
-        >
-            View Resume
-        </a>
-        <p style="margin-top: 1rem;">
-            <a href="Ethan_E_Lopez_Resume.pdf" download             
-            target="_blank" class="btn"
-            style="font-weight: bold; font-size: 0.85rem;"
-            >
-                Download PDF
-            </a>
-        </p>
-            </div>
-</section>
-
-<section id="projects"> <!-- section heading for projects and project highlights -->
-    <h2>Projects</h2>
-    
-    <div class="project-category">
-        <h3>Python & Data Science</h3>
-        <p class="category-description">
-            Machine learning, data analysis, and applied statistical modeling projects.
-        </p>        
-        <div class="projects">
-            <div class="card">
-                <h3>NED Robot Tic-Tac-Toe Automation</h3> <!-- project title -->
-                <p>
-                    Developed a program for NED robots to autonomously play Tic-Tac-Toe using Python and computer vision. <!-- project description -->
-                </p>
-    
-                <div class="project-skills"> <!-- skill tags for project-specific technologies and techniques -->
-                    <span>Python</span>
-                    <span>Robotics Programming</span>
-                    <span>Computer Vision</span>
-                    <span>HSV Color Detection</span>
-                    <span>State-Based Logic</span>
-                    <span>Motion Control</span>
-                </div>
-                                        
-                <a 
-                    href="https://github.com/etCeO/.Ned2TicTacToePy" 
-                    target="_blank" class="btn"
-                >
-                    View Project Repository 
-                </a>
-            </div>
-            <div class="card">
-                <h3>Statistical Models Capstone</h3>
-                <p>
-                    Applied multiple machine learning models with clustering to
-                    identify customer behavior segments and key behavioral drivers.
-                </p>
-    
-                <div class="project-skills">
-                    <span>Python</span>
-                    <span>Scikit-Learn</span>
-                    <span>Clustering</span>
-                    <span>Model Evaluation</span>
-                    <span>Feature Engineering</span>
-                    <span>Data Visualization</span>
-                </div>
-                                        
-                <a 
-                    href="https://docs.google.com/presentation/d/1kIDVIE7pJMG85N4BTISj4br00xd0yBhFSfypMXSVWmM/edit?slide=id.g20a455cc9cd_0_0#slide=id.g20a455cc9cd_0_0"
-                    target="_blank" class="btn"
-                >
-                    View Project Presentation 
-                </a>
-            </div>
-            <div class="card">
-                <h3>College Placement Analysis</h3>
-                <p>
-                    Applied data analysis techniques to analyze 10,000+ student records and communicate model results through effective visualizations.
-                </p>
-            
-                <div class="project-skills">
-                    <span>Python</span>
-                    <span>Pandas</span>
-                    <span>NumPy</span>
-                    <span>Data Cleaning</span>
-                    <span>Exploratory Data Analysis</span>
-                    <span>Matplotlib</span>
-                    <span>Data Visualization</span>
-                </div>
-            
-                <a href="https://docs.google.com/presentation/d/1B_nop3aA-1DpjGAnqLCbx2D9OI-p9o2_CH8BxWSZkhI/edit?usp=sharing" target="_blank" class="btn">
-                    View Project Presentation
-                </a>
-            </div>
-            <div class="card">
-                <h3>Business Analytics Foundations Overview</h3>
-                <p>
-                    Applied regression and classification models to analyze stakeholder behavior and drive data-informed recommendations.            
-                </p>
-    
-                <div class="project-skills">
-                    <span>Regression Analysis</span>
-                    <span>Classification Models</span>
-                    <span>Python</span>
-                    <span>Data Analysis</span>
-                    <span>Model Interpretation</span>
-                    <span>Business Insights</span>
-                </div>            
-    
-                <a 
-                    href="https://docs.google.com/presentation/d/1dB9JbMPjeEQebhnWXhg1x_uBjXmeZO1MpAO-BFVFA_0/edit?usp=sharing"
-                    target="_blank" class="btn"
-                >
-                    View Project Presentation 
-                </a>
-            </div>
-    
-        </div>
+    <div class="resume-card">
+      <p>A detailed overview of my education, experience, and technical skills. Available to view online or download as a PDF.</p>
+      <div class="resume-actions">
+        <a href="Ethan_E_Lopez_Resume.pdf" target="_blank" class="btn-primary">View Resume</a>
+        <a href="Ethan_E_Lopez_Resume.pdf" download class="btn">Download PDF</a>
+      </div>
     </div>
+  </section>
 
-    <div class="project-category">
-        <h3>C++ & Algorithms</h3>
-        <p class="category-description">
-            Efficient algorithms, data structures, and multi-class performance projects.
-        </p>        
-        <div class="projects">
-            <div class="card">
-                <h3>Kruskal's Algorithm</h3>
-                <p>
-                    Implemented a C++ solution to compute minimum spanning tree costs from weighted adjacency matrices using Kruskal’s algorithm.            
-                </p>
-    
-                <div class="project-skills">
-                    <span>C++</span>
-                    <span>Graph Theory</span>
-                    <span>Minimum Spanning Trees</span>
-                    <span>Algorithms</span>
-                    <span>Data Structures</span>
-                    <span>Time Complexity Analysis</span>
-                </div>
-                            
-                <a 
-                    href="https://github.com/etCeO/.KrsklsAlgCpp"
-                    target="_blank" class="btn"
-                >
-                    View Project Repository 
-                </a>
-            </div>
-            <div class="card">
-                <h3>Scare Games</h3>
-                <p>
-                    Developed a binary tree simulation to manage tournament progression based on player scores.            
-                </p>
-    
-                <div class="project-skills">
-                    <span>C++</span>
-                    <span>Binary Trees</span>
-                    <span>Data Structures</span>
-                    <span>Algorithm Design</span>
-                    <span>Simulation</span>
-                </div>
-                            
-                <a 
-                    href="https://github.com/etCeO/.ScrGmsCpp"
-                    target="_blank" class="btn"
-                >
-                    View Project Repository 
-                </a>
-            </div>
-            <div class="card">
-                <h3>Blockchain Node Constructor</h3>
-                <p>
-                    Built lightweight database components in C++ supporting real-time ingestion and queries.            
-                </p>
-    
-                <div class="project-skills">
-                    <span>C++</span>
-                    <span>Blockchain Fundamentals</span>
-                    <span>Database Design</span>
-                    <span>Data Ingestion</span>
-                    <span>Query Processing</span>
-                    <span>Systems Programming</span>
-                </div>
-                            
-                <a 
-                    href="https://github.com/etCeO/.BlkChnLdgrCpp"
-                    target="_blank" class="btn"
-                >
-                    View Project Repository 
-                </a>
-            </div>
-            <div class="card">
-                <h3>Seat Reader View Analysis</h3>
-                <p>
-                    Developed a seating analysis program that determines stage visibility using height and arrangement data.            
-                </p>
-    
-                <div class="project-skills">
-                    <span>C++</span>
-                    <span>Algorithm Design</span>
-                    <span>Array Processing</span>
-                    <span>Data Analysis</span>
-                    <span>Problem Solving</span>
-                </div>
-                            
-                <a 
-                    href="https://github.com/etCeO/.StRdrVwCpp"
-                    target="_blank" class="btn"
-                >
-                    View Project Repository 
-                </a>
-            </div>
-            <div class="card">
-                <h3>Not So Super Mario Bros.</h3>
-                <p>
-                    Built a simulation that parses structured world data and models Mario’s progression, including enemy interactions, coin collection, and state updates.            
-                </p>
-    
-                <div class="project-skills">
-                    <span>C++</span>
-                    <span>Simulation Modeling</span>
-                    <span>State Management</span>
-                    <span>Data Parsing</span>
-                    <span>Algorithm Design</span>
-                </div>
-                            
-                <a 
-                    href="https://github.com/etCeO/.MrioBrsGmCpp"
-                    target="_blank" class="btn"
-                >
-                    View Project Repository 
-                </a>
-            </div>
-            <div class="card">
-                <h3>Robber Language Translator</h3>
-                <p>
-                    Designed a translation tool that processes text input, applies Robber Language rules, and outputs formatted HTML content.            
-                </p>
-    
-                <div class="project-skills">
-                    <span>C++</span>
-                    <span>String Manipulation</span>
-                    <span>Parsing Algorithms</span>
-                    <span>Text Processing</span>
-                    <span>HTML Generation</span>
-                </div>
-                            
-                <a 
-                    href="https://github.com/etCeO/.RbrTrnsltrCpp"
-                    target="_blank" class="btn"
-                >
-                    View Project Repository 
-                </a>
-            </div>
-        </div>
+  <section id="education">
+    <div class="section-label">07 // education</div>
+    <h2>Education</h2>
+    <div class="edu-card">
+      <div class="school">Chapman University</div>
+      <div class="degree">B.S. Data Science · Minor: Business Administration</div>
+      <div class="meta">Orange, CA · GPA: 3.91 · May 2026</div>
+      <div class="coursework-label">Relevant coursework</div>
+      <div class="coursework-tags">
+        <span class="coursework-tag">Machine Learning</span>
+        <span class="coursework-tag">Applied Business Analytics</span>
+        <span class="coursework-tag">Data Structures & Algorithms</span>
+        <span class="coursework-tag">Database Management</span>
+        <span class="coursework-tag">Business Statistics</span>
+        <span class="coursework-tag">Data Networks & Communications</span>
+        <span class="coursework-tag">Statistical Models in Business Analytics</span>
+        <span class="coursework-tag">Human-Computer Interaction</span>
+        <span class="coursework-tag">Artificial Intelligence</span>
+      </div>
     </div>
+  </section>
 
-    <div class="project-category">
-        <h3>Java & Object-Oriented Programming</h3>
-        <p class="category-description">
-            Scalable object-oriented projects with clean, modular designs.
-        </p>        
-        <div class="projects">
+  <section id="archive">
+    <div class="section-label">08 // archive</div>
+    <h2>Additional projects</h2>
+    <details>
+      <summary>Show all projects</summary>
+      <div class="projects-grid">
 
-            <div class="card">
-                <h3>DigiShelf Virtual Library Simulation</h3>
-                <p>
-                    Developed a library management simulation supporting catalog and customer operations.            
-                </p>
-    
-                <div class="project-skills">
-                    <span>Java</span>
-                    <span>Object-Oriented Programming</span>
-                    <span>System Simulation</span>
-                    <span>Data Management</span>
-                    <span>Software Design</span>
-                </div>
-                            
-                <a 
-                    href="https://github.com/etCeO/.DigiShelfJvaLibs"
-                    target="_blank" class="btn"
-                >
-                    View Project Repository 
-                </a>
-            </div>
-            <div class="card">
-                <h3>SlapJack Card Game</h3>
-                <p>
-                    Implemented game rules and combination detection to accurately simulate Slap gameplay scenarios.            
-                </p>
-    
-                <div class="project-skills">
-                    <span>Java</span>
-                    <span>Game Logic</span>
-                    <span>Algorithm Design</span>
-                    <span>Rule-Based Systems</span>
-                    <span>Simulation</span>
-                </div>
-                            
-                <a 
-                    href="https://github.com/etCeO/.SlpJvaCrdGm"
-                    target="_blank" class="btn"
-                >
-                    View Project Repository 
-                </a>
-            </div>
-            <div class="card">
-                <h3>Chipotle Ordering System</h3>
-                <p>
-                    Built an ordering system simulation that handles ingredient selection, pricing logic, and receipt generation.            
-                </p>
-    
-                <div class="project-skills">
-                    <span>Java</span>
-                    <span>Object-Oriented Programming</span>
-                    <span>Business Logic</span>
-                    <span>Pricing Algorithms</span>
-                    <span>System Simulation</span>
-                </div>
-                            
-                <a 
-                    href="https://github.com/etCeO/.ChptleJvaBrrto"
-                    target="_blank" class="btn"
-                >
-                    View Project Repository 
-                </a>
-            </div>
-    
+        <div class="project-card">
+          <h3>Evolutionary String Optimization Using Genetic Algorithms</h3>
+          <p>Developed and evaluated multiple genetic algorithms to optimize convergence toward target solutions, reducing generations required from 4,716 to 171.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Genetic Algorithms</span><span class="tag">AI</span><span class="tag">OOP</span></div>
+          <a href="https://github.com/etCeO/.AIStrngMtchngPy" class="btn" target="_blank">View Project</a>
         </div>
-    </div>
 
-    <div class="project-category">
-        <h3>UX, Product, & Design</h3>
-        <p class="category-description">
-            User-centered design driven by structure, feedback, and usability.        
-        </p>        
-
-    <div class="projects"> <!-- grid layout for project cards -->
-        <div class="card">
-            <h3>StepUp Career Platform</h3>
-            <p>
-                Analyzed user feedback from 20+ participants and designed a Figma prototype, achieving 90% solution success and 80% alignment with user needs.            
-            </p>
-
-            <div class="project-skills">
-                <span>User Research</span>
-                <span>Data Analysis</span>
-                <span>Figma</span>
-                <span>Survey Analysis</span>
-                <span>Statistical Testing</span>
-                <span>UX Design</span>
-            </div>
-
-            <a 
-                href="https://docs.google.com/presentation/d/1-c068O56zs1snqzFFhqe4WA-PyuC2SpBIxu2bAX6hHk/edit?slide=id.g3aba9a9331c_0_0#slide=id.g3aba9a9331c_0_0"
-                target="_blank" class="btn"
-            >
-                View Project Presentation 
-            </a>
+        <div class="project-card">
+          <h3>StepUp Career Platform</h3>
+          <p>Conducted user research and designed an interactive career-search platform prototype informed by usability testing and behavioral analytics.</p>
+          <div class="tags"><span class="tag">UX Research</span><span class="tag">Figma</span><span class="tag">User Testing</span></div>
+          <a href="https://docs.google.com/presentation/d/1-c068O56zs1snqzFFhqe4WA-PyuC2SpBIxu2bAX6hHk/edit?usp=sharing" class="btn" target="_blank">View Project</a>
         </div>
-        <div class="card">
-            <h3>ProGach Screen Time Control App</h3>
-            <p>
-                Developed UI & documented user workflows while conducting significance testing for product impact.            
-            </p>
 
-            <div class="project-skills">
-                <span>UI Design</span>
-                <span>Workflow Documentation</span>
-                <span>Statistical Significance Testing</span>
-                <span>Data Analysis</span>
-                <span>Product Analytics</span>
-            </div>
-                        
-            <a 
-                href="https://www.linkedin.com/posts/ethan-lopez-1a06642b1_these-past-three-semesters-i-had-the-pleasure-activity-7336955720073961472-bgBR/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEsGmggBJUHxmTFJ8XTgk0EUE_bb6E9W2Lc"
-                target="_blank" class="btn"
-            >
-                View Project Posts 
-            </a>
+        <div class="project-card">
+          <h3>Foundations of Business Analytics</h3>
+          <p>Applied predictive modeling and statistical analysis techniques to generate actionable business recommendations from stakeholder data.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Regression</span><span class="tag">Classification</span></div>
+          <a href="https://docs.google.com/presentation/d/1dB9JbMPjeEQebhnWXhg1x_uBjXmeZO1MpAO-BFVFA_0/edit?usp=sharing" class="btn" target="_blank">View Presentation</a>
         </div>
-        <div class="card">
-            <h3>RC Scrap Build Website</h3>
-            <p>
-                Developed an instructional website using Wix featuring interactive resources for RC car design, build, and testing.            
-            </p>
 
-            <div class="project-skills">
-                <span>Web Development</span>
-                <span>UI Design</span>
-                <span>Instructional Design</span>
-                <span>Wix</span>
-                <span>Content Organization</span>
-            </div>
-                        
-            <a 
-                href="https://ethanelopez04.wixsite.com/rc-scrap-build-1"
-                target="_blank" class="btn"
-            >
-                View Project Website 
-            </a>
+        <div class="project-card">
+          <h3>RC Scrap Build</h3>
+          <p>Designed and assembled a functioning RC vehicle using embedded systems, Arduino programming, and custom mechanical components.</p>
+          <div class="tags"><span class="tag">Arduino</span><span class="tag">Embedded Systems</span><span class="tag">3D Printing</span></div>
+          <a href="https://docs.google.com/presentation/d/1YooA-lmfSAsrPho0ToxJqOEH9HB9zkyIAw8cuEpxCMk/edit?usp=sharing" class="btn" target="_blank">View Project</a>
         </div>
-        <div class="card">
-            <h3>RC Scrap Build</h3>
-            <p>
-                Applied circuit design, Arduino programming, and mechanical prototyping to design, build, and test a working RC car system.            
-            </p>
 
-            <div class="project-skills">
-                <span>Arduino Programming</span>
-                <span>Circuit Design</span>
-                <span>Embedded Systems</span>
-                <span>Mechanical Prototyping</span>
-                <span>Hardware Testing</span>
-            </div>
-                        
-            <a 
-                href="https://docs.google.com/presentation/d/1YooA-lmfSAsrPho0ToxJqOEH9HB9zkyIAw8cuEpxCMk/edit?usp=sharing"
-                target="_blank" class="btn"
-            >
-                View Project Presentation 
-            </a>
+        <div class="project-card">
+          <h3>DigiShelf Virtual Library Simulation</h3>
+          <p>Built a Java-based virtual library platform supporting catalog browsing, search functionality, and user account management.</p>
+          <div class="tags"><span class="tag">Java</span><span class="tag">OOP</span><span class="tag">Software Design</span></div>
+          <a href="https://github.com/etCeO/.DigiShelfJvaLibs" class="btn" target="_blank">View Repository</a>
         </div>
-        </div>
-    </div>
-    
-    </div>
-</section>
 
-<section id="contact"> <!-- section heading for contact information and message form -->
+        <div class="project-card">
+          <h3>ProGach Screen Time Control App</h3>
+          <p>Supported documentation, interface design, and statistical analysis for a mobile application promoting healthier screen-time habits.</p>
+          <div class="tags"><span class="tag">UI Design</span><span class="tag">Data Analysis</span><span class="tag">GitHub</span></div>
+          <a href="https://www.linkedin.com/posts/ethan-e-lopez_these-past-three-semesters-i-had-the-pleasure-ugcPost-7336955718329135105-YEaX/" class="btn" target="_blank">View Project</a>
+        </div>
+
+        <div class="project-card">
+          <h3>Kruskal's Algorithm</h3>
+          <p>Implemented a minimum spanning tree solution in C++ using Kruskal's algorithm and weighted graph representations.</p>
+          <div class="tags"><span class="tag">C++</span><span class="tag">Graph Theory</span><span class="tag">Algorithms</span></div>
+          <a href="https://github.com/etCeO/.KrsklsAlgCpp" class="btn" target="_blank">View Repository</a>
+        </div>
+
+        <div class="project-card">
+          <h3>Scare Games</h3>
+          <p>Created a binary-tree-based tournament simulation that tracks player progression and determines competition outcomes.</p>
+          <div class="tags"><span class="tag">C++</span><span class="tag">Binary Trees</span><span class="tag">Simulation</span></div>
+          <a href="https://github.com/etCeO/.ScrGmsCpp" class="btn" target="_blank">View Repository</a>
+        </div>
+
+        <div class="project-card">
+          <h3>Not So Super Mario Bros.</h3>
+          <p>Built a game-state simulation that models player progression, interactions, scoring, and world traversal mechanics.</p>
+          <div class="tags"><span class="tag">C++</span><span class="tag">State Management</span><span class="tag">OOP</span></div>
+          <a href="https://github.com/etCeO/.MrioBrsGmCpp" class="btn" target="_blank">View Repository</a>
+        </div>
+
+        <div class="project-card">
+          <h3>Robber Language Translator</h3>
+          <p>Developed a text-processing utility that translates user input into Robber Language and generates formatted HTML output.</p>
+          <div class="tags"><span class="tag">C++</span><span class="tag">String Processing</span><span class="tag">HTML Generation</span></div>
+          <a href="https://github.com/etCeO/.RbrTrnsltrCpp" class="btn" target="_blank">View Repository</a>
+        </div>
+
+        <div class="project-card">
+          <h3>SlapJack Card Game</h3>
+          <p>Simulated the SlapJack card game by implementing gameplay rules, state tracking, and combination detection logic.</p>
+          <div class="tags"><span class="tag">Java</span><span class="tag">OOP</span><span class="tag">Simulation</span></div>
+          <a href="https://github.com/etCeO/.SlpJvaCrdGm" class="btn" target="_blank">View Repository</a>
+        </div>
+
+        <div class="project-card">
+          <h3>Chipotle Ordering System</h3>
+          <p>Built a restaurant ordering simulation featuring ingredient selection, pricing calculations, and receipt generation workflows.</p>
+          <div class="tags"><span class="tag">Java</span><span class="tag">Business Logic</span><span class="tag">OOP</span></div>
+          <a href="https://github.com/etCeO/.ChptleJvaBrrto" class="btn" target="_blank">View Repository</a>
+        </div>
+
+      </div>
+    </details>
+  </section>
+
+  <section id="contact">
+    <div class="section-label">09 // contact</div>
     <h2>Contact</h2>
-    <div class="card">
-        <p>
-            I’m always open to connecting with fellow students, researchers, and professionals.
-            Whether you’d like to collaborate, discuss projects, or simply start a conversation,
-            feel free to reach out. <!-- contact invitation -->
-        </p> <!-- contact details with links -->
-        <p>Contact: 
-            <a href="mailto:ethanelopez04@gmail.com" class="btn">Email</a> ·             
-            <a href="https://www.linkedin.com/in/ethan-e-lopez/" target="_blank" class="btn">LinkedIn</a> · 
-            <a href="https://github.com/etCeO" target="_blank" class="btn">GitHub</a>
-        </p>
-        <hr style="margin:1.5rem 0;">
+    <p class="contact-top">Open to connecting with professionals, recruiters, researchers, and organizations interested in data science, analytics, and technology. Whether you'd like to discuss opportunities, collaborate on a project, or just connect — feel free to reach out.</p>
 
-        <h3>Send me a message</h3> <!-- contact form for sending messages directly from the website -->
-
-        <form action="https://formspree.io/f/mzdazjjj" method="POST">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
+    <div class="contact-links">
+      <a href="mailto:ethanelopez04@gmail.com" class="contact-link">✉ Email</a>
+      <a href="https://www.linkedin.com/in/ethan-e-lopez/" target="_blank" class="contact-link">↗ LinkedIn</a>
+      <a href="https://github.com/etCeO" target="_blank" class="contact-link">↗ GitHub</a>
     </div>
-</section>
 
-<footer>
-    © 2026 Ethan E. Lopez — Data Science Portfolio <!-- footer with copyright information -->
-</footer>
+    <hr class="form-divider">
+    <span class="form-label">Send a message</span>
+
+    <form action="https://formspree.io/f/mzdazjjj" method="POST">
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Your email" required>
+      <textarea name="message" placeholder="Your message" rows="5" required></textarea>
+      <button type="submit">Send message →</button>
+    </form>
+  </section>
+
+</div>
+
+<footer>© 2026 Ethan E. Lopez — Portfolio Website</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('section').forEach(s => observer.observe(s));
+</script>
 
 </body>
 </html>
