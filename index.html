@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ethan Ernesto Lopez | Portfolio Website</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>Ethan Ernesto Lopez | Data Science &amp; Analytics Portfolio</title>
+<meta name="description" content="Portfolio of Ethan Ernesto Lopez, a Chapman University data science graduate focused on machine learning, business intelligence, and statistical analysis."><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
@@ -19,7 +19,7 @@
   --accent-dim: rgba(99,179,237,0.08);
   --text: #f8fafc;
   --text-muted: #94a3b8;
-  --text-dim: #4a5568;
+  --text-dim: #8b98ad;
   --green: #68d391;
   --mono: 'IBM Plex Mono', monospace;
   --sans: 'DM Sans', sans-serif;
@@ -32,20 +32,16 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
   font-size: 15px;
   line-height: 1.7;
   min-height: 100vh;
-  body {
-  background:
-    radial-gradient(circle at top,
-      rgba(99,179,237,.08),
-      transparent 45%),
-    #0b1120;
-    }  
-    background-size: 40px 40px;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at top, rgba(99,179,237,0.08), transparent 45%),
+    radial-gradient(rgba(99,179,237,0.10) 1px, transparent 1px);
+  background-size: auto, 32px 32px;
 }
 
 /* ── SCROLLBAR ── */
@@ -169,7 +165,7 @@ nav a:hover {
 }
 
 section {
-  padding: 3.5rem 0;
+  padding: 5rem 0;
   border-bottom: 1px solid var(--border);
   scroll-margin-top: 70px;
   opacity: 0;
@@ -309,10 +305,6 @@ h2 {
   max-width: 620px;
 }
 
-section {
-    padding: 5rem 0;
-}
-
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -323,7 +315,7 @@ section {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 1.4rem;
+  padding: 1.75rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -361,10 +353,6 @@ section {
   font-weight: 300;
   line-height: 1.65;
   flex: 1;
-}
-
-.project-card {
-    padding: 1.75rem;
 }
 
 /* ── TAGS ── */
@@ -647,9 +635,47 @@ header { animation: fadeIn 0.7s ease forwards; }
   .resume-card { flex-direction: column; }
   nav a { font-size: 0.68rem; padding: 0.3rem 0.5rem; }
 }
+
+/* ── ACCESSIBILITY ── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--accent);
+  color: var(--bg);
+  padding: 0.5rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  border-radius: var(--radius);
+  z-index: 200;
+}
+.skip-link:focus { left: 1rem; top: 1rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  section { opacity: 1; transform: none; }
+}
+
+@media print {
+  section { opacity: 1; transform: none; }
+}
+
 </style>
+<noscript><style>section { opacity: 1; transform: none; }</style></noscript>
+
 </head>
 <body>
+  <a href="#about" class="skip-link">Skip to content</a>
 
 <header>
   <img src="ethanelopez04@gmail.com-3.jpg" alt="Ethan E. Lopez" class="profile-pic">
