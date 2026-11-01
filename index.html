@@ -258,6 +258,7 @@ nav a:hover {
   background: var(--accent-dim);
   text-decoration: none;
 }
+nav a.active { color: var(--accent); background: var(--accent-dim); }
 
 /* ── LAYOUT ── */
 .container {
@@ -645,6 +646,11 @@ h2::after {
   font-weight: 300;
   max-width: 480px;
 }
+.resume-card {
+  background: linear-gradient(135deg, var(--surface), rgba(96,165,250,0.08));
+  border-color: var(--border-hover);
+}
+.resume-info { display: flex; align-items: center; gap: 1rem; }
 
 .resume-actions {
   display: flex;
@@ -709,6 +715,18 @@ h2::after {
   border-radius: var(--radius);
   font-family: var(--mono);
 }
+
+.edu-card { position: relative; overflow: hidden; }
+.edu-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+.gpa { color: var(--amber); font-family: var(--mono); font-weight: 500; }
+.coursework-tag { transition: border-color 0.2s, color 0.2s; }
+.coursework-tag:hover { border-color: var(--border-hover); color: var(--text); }
 
 /* ── ARCHIVE ── */
 details summary {
@@ -786,6 +804,24 @@ form {
   flex-direction: column;
   gap: 10px;
   max-width: 560px;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+.contact-info .contact-links { margin-bottom: 0; }
+.contact-form-wrap .form-label { margin-bottom: 0.8rem; }
+form label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  margin-bottom: -4px;
+}
+@media (max-width: 760px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
 }
 input, textarea {
   background: var(--surface);
@@ -896,6 +932,7 @@ input:focus-visible, textarea:focus-visible {
       <symbol id="i-layout" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></symbol>
       <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></symbol>
       <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
     </defs>
   </svg>
 
@@ -918,7 +955,7 @@ input:focus-visible, textarea:focus-visible {
         <ul class="hero-stats">
           <li><strong>0.92</strong><span>ROC-AUC, wearable activity model</span></li>
           <li><strong>9M+</strong><span>booking records modeled</span></li>
-          <li><strong>3.91</strong><span>GPA, B.S. Data Science</span></li>
+          <li><strong>3.92</strong><span>GPA, B.S. Data Science</span></li>
         </ul>
       </div>
   
@@ -967,7 +1004,7 @@ input:focus-visible, textarea:focus-visible {
     </div>
   </header>
 
-<nav>
+<nav aria-label="Main">
   <a href="#about">about</a>
   <a href="#experience">experience</a>
   <a href="#data-science">data science</a>
@@ -1267,7 +1304,10 @@ input:focus-visible, textarea:focus-visible {
     <div class="section-label">06 // resume</div>
     <h2>Resume</h2>
     <div class="resume-card">
-      <p>A detailed overview of my education, experience, and technical skills. Available to view online or download as a PDF.</p>
+      <div class="resume-info">
+        <svg class="card-icon" aria-hidden="true"><use href="#i-file"/></svg>
+        <p>A detailed overview of my education, experience, and technical skills. Available to view online or download as a PDF.</p>
+      </div>      
       <div class="resume-actions">
         <a href="Ethan_E_Lopez_Resume.pdf" target="_blank" class="btn-primary">View Resume</a>
         <a href="Ethan_E_Lopez_Resume.pdf" download class="btn">Download PDF</a>
@@ -1281,8 +1321,7 @@ input:focus-visible, textarea:focus-visible {
     <div class="edu-card">
       <div class="school">Chapman University</div>
       <div class="degree">B.S. Data Science · Minor: Business Administration</div>
-      <div class="meta">Orange, CA · GPA: 3.91 · May 2026</div>
-      <div class="coursework-label">Relevant coursework</div>
+      <div class="meta">Orange, CA · GPA: <strong class="gpa">3.92</strong> · May 2026</div>      <div class="coursework-label">Relevant coursework</div>
       <div class="coursework-tags">
         <span class="coursework-tag">Machine Learning</span>
         <span class="coursework-tag">Applied Business Analytics</span>
@@ -1409,24 +1448,33 @@ input:focus-visible, textarea:focus-visible {
   <section id="contact">
     <div class="section-label">09 // contact</div>
     <h2>Contact</h2>
-    <p class="contact-top">Open to connecting with professionals, recruiters, researchers, and organizations interested in data science, analytics, and technology. Whether you'd like to discuss opportunities, collaborate on a project, or just connect — feel free to reach out.</p>
 
-    <div class="contact-links">
-      <a href="mailto:ethan.lopez.ernesto@gmail.com" class="contact-link">✉ Email</a>
-      <a href="https://www.linkedin.com/in/ethan-e-lopez/" target="_blank" class="contact-link">↗ LinkedIn</a>
-      <a href="https://github.com/etCeO" target="_blank" class="contact-link">↗ GitHub</a>
+    <div class="contact-grid">
+
+      <div class="contact-info">
+        <p class="contact-top">Open to connecting with professionals, recruiters, researchers, and organizations interested in data science, analytics, and technology. Whether you'd like to discuss opportunities, collaborate on a project, or just connect — feel free to reach out.</p>
+        <div class="contact-links">
+          <a href="mailto:ethan.lopez.ernesto@gmail.com" class="contact-link">✉ Email</a>
+          <a href="https://www.linkedin.com/in/ethan-e-lopez/" target="_blank" rel="noopener noreferrer" class="contact-link">↗ LinkedIn</a>
+          <a href="https://github.com/etCeO" target="_blank" rel="noopener noreferrer" class="contact-link">↗ GitHub</a>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <span class="form-label">Send a message</span>
+        <form action="https://formspree.io/f/mzdazjjj" method="POST">
+          <label for="f-name">Name</label>
+          <input id="f-name" type="text" name="name" placeholder="Your name" autocomplete="name" required>
+          <label for="f-email">Email</label>
+          <input id="f-email" type="email" name="email" placeholder="Your email" autocomplete="email" required>
+          <label for="f-message">Message</label>
+          <textarea id="f-message" name="message" placeholder="Your message" rows="5" required></textarea>
+          <button type="submit">Send message →</button>
+        </form>
+      </div>
+
     </div>
-
-    <hr class="form-divider">
-    <span class="form-label">Send a message</span>
-
-    <form action="https://formspree.io/f/mzdazjjj" method="POST">
-      <input type="text" name="name" placeholder="Your name" required>
-      <input type="email" name="email" placeholder="Your email" required>
-      <textarea name="message" placeholder="Your message" rows="5" required></textarea>
-      <button type="submit">Send message →</button>
-    </form>
-  </section>
+    </section>
 
 </div>
 
@@ -1442,6 +1490,19 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.06 });
 document.querySelectorAll('section').forEach(s => observer.observe(s));
+const navLinks = document.querySelectorAll('nav a');
+const navObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    navLinks.forEach(a => {
+      const on = a.getAttribute('href') === '#' + e.target.id;
+      a.classList.toggle('active', on);
+      if (on) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
+  });
+}, { rootMargin: '-40% 0px -55% 0px' });
+document.querySelectorAll('section[id]').forEach(s => navObserver.observe(s));
 </script>
 
 </body>
