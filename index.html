@@ -823,6 +823,45 @@ form label {
 @media (max-width: 760px) {
   .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
 }
+/* contact refinements */
+.contact-grid { grid-template-columns: 1fr 1.1fr; }
+.contact-top { margin-bottom: 1.8rem; }
+
+.contact-stack {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+.contact-stack .contact-link {
+  width: 100%;
+  padding: 0.9rem 1.1rem;
+  gap: 0.9rem;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+}
+.cl-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  font-size: 0.95rem;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.cl-text { display: flex; flex-direction: column; line-height: 1.35; }
+.cl-text strong { font-weight: 500; color: var(--text); font-size: 0.82rem; }
+.cl-text small { color: var(--text-muted); font-size: 0.72rem; }
+
+.contact-form-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.8rem;
+}
+.contact-form-wrap form { max-width: none; }
 input, textarea {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -1453,11 +1492,20 @@ input:focus-visible, textarea:focus-visible {
 
       <div class="contact-info">
         <p class="contact-top">Open to connecting with professionals, recruiters, researchers, and organizations interested in data science, analytics, and technology. Whether you'd like to discuss opportunities, collaborate on a project, or just connect — feel free to reach out.</p>
-        <div class="contact-links">
-          <a href="mailto:ethan.lopez.ernesto@gmail.com" class="contact-link">✉ Email</a>
-          <a href="https://www.linkedin.com/in/ethan-e-lopez/" target="_blank" rel="noopener noreferrer" class="contact-link">↗ LinkedIn</a>
-          <a href="https://github.com/etCeO" target="_blank" rel="noopener noreferrer" class="contact-link">↗ GitHub</a>
-        </div>
+        <div class="contact-links contact-stack">
+          <a href="mailto:ethan.lopez.ernesto@gmail.com" class="contact-link">
+            <span class="cl-icon" aria-hidden="true">✉</span>
+            <span class="cl-text"><strong>Email</strong><small>ethan.lopez.ernesto@gmail.com</small></span>
+          </a>
+          <a href="https://www.linkedin.com/in/ethan-e-lopez/" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <span class="cl-icon" aria-hidden="true">↗</span>
+            <span class="cl-text"><strong>LinkedIn</strong><small>in/ethan-e-lopez</small></span>
+          </a>
+          <a href="https://github.com/etCeO" target="_blank" rel="noopener noreferrer" class="contact-link">
+            <span class="cl-icon" aria-hidden="true">↗</span>
+            <span class="cl-text"><strong>GitHub</strong><small>@etCeO</small></span>
+          </a>
+        </div>      
       </div>
 
       <div class="contact-form-wrap">
