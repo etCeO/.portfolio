@@ -1,6 +1,5 @@
-# Ethan Ernesto Lopez | Portfolio
-
-Every project here reflects my growth, adaptability, and commitment to turning ideas into functional, meaningful results. I'm excited to keep learning and building, taking on new technological challenges along the way.
+# My Portfolio Website
+Every project here reflects my growth, adaptability, and commitment to turning ideas into functional, meaningful results. I’m excited to keep learning and building, taking on new technological challenges along the way.
 
 **Live site:** https://etceo.github.io/.portfolio/
 
