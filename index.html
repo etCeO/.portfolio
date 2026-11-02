@@ -195,6 +195,7 @@ body {
   position: absolute;
   top: 50%; left: 50%;
   width: 34%;
+  height: auto;
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
   border-radius: 50%;
@@ -1052,7 +1053,7 @@ input:focus-visible, textarea:focus-visible {
           <text class="net-label" x="123" y="284" text-anchor="end">SNA</text>
           <text class="net-label" x="99" y="144" text-anchor="end">SQL</text>
         </svg>
-        <img class="hero-photo" src="profile.jpg" alt="Ethan E. Lopez">
+        <img class="hero-photo" src="profile.jpg" alt="Ethan E. Lopez" width="480" height="480" fetchpriority="high" decoding="async">      
       </div>
   
     </div>
@@ -1070,7 +1071,7 @@ input:focus-visible, textarea:focus-visible {
   <a href="#contact">contact</a>
 </nav>
 
-<div class="container">
+<main class="container" id="main">
 
   <section id="about">
     <div class="section-label">01 // about</div>
@@ -1539,7 +1540,7 @@ input:focus-visible, textarea:focus-visible {
     </div>
     </section>
 
-</div>
+</main>
 
 <footer>© 2026 Ethan E. Lopez — Portfolio Website</footer>
 
@@ -1566,6 +1567,13 @@ const navObserver = new IntersectionObserver((entries) => {
   });
 }, { rootMargin: '-40% 0px -55% 0px' });
 document.querySelectorAll('section[id]').forEach(s => navObserver.observe(s));
+document.querySelectorAll('.project-card .btn').forEach(a => {
+  const title = a.closest('.project-card').querySelector('h3');
+  if (title) {
+    const name = title.textContent.replace(/in progress/i, '').trim();
+    a.setAttribute('aria-label', a.textContent.trim() + ': ' + name);
+  }
+});
 </script>
 
 </body>
