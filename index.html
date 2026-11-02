@@ -971,6 +971,12 @@ input:focus-visible, textarea:focus-visible {
 @media print {
   section { opacity: 1; transform: none; }
 }
+/* contact stacks on phones (must stay at the end of the CSS) */
+@media (max-width: 760px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .contact-form-wrap { padding: 1.4rem; }
+  input, textarea { font-size: 16px; }
+}
 
 </style>
 <noscript><style>section { opacity: 1; transform: none; }</style></noscript>
