@@ -938,6 +938,138 @@ header { animation: fadeIn 0.7s ease forwards; }
   h2::before { display: none; }
 }
 
+/* ── FEATURED PROJECTS ── */
+.featured-stack { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.flagship {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border-hover);
+  border-radius: 14px;
+  padding: 2rem;
+  transition: border-color 0.2s, box-shadow 0.3s;
+}
+.flagship:hover { border-color: var(--accent); box-shadow: 0 0 40px rgba(96,165,250,0.08); }
+.flagship::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+.flagship-research::before { background: linear-gradient(90deg, var(--amber), var(--accent)); }
+
+.flag-top { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; margin-bottom: 0.9rem; }
+.flag-kicker {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.flagship-research .flag-kicker { color: var(--amber); }
+.status-badge {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--green);
+  background: rgba(104,211,145,0.08);
+  border: 1px solid rgba(104,211,145,0.35);
+  padding: 2px 10px;
+  border-radius: 99px;
+}
+.status-badge::before { content: '✓ '; }
+
+.flagship h3 {
+  font-family: var(--sans);
+  font-size: clamp(1.3rem, 2.8vw, 1.7rem);
+  font-weight: 500;
+  line-height: 1.25;
+  color: #fff;
+  margin-bottom: 0.7rem;
+}
+.flag-lede { color: var(--text); font-weight: 300; font-size: 0.95rem; margin-bottom: 1.2rem; }
+
+.flag-rows { display: grid; gap: 0.85rem; margin-bottom: 1.2rem; }
+.flag-rows dt {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.flagship-research .flag-rows dt { color: var(--amber); }
+.flag-rows dd { font-size: 0.85rem; color: var(--text-muted); font-weight: 300; line-height: 1.6; }
+
+.flag-stats {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 1.2rem;
+}
+.flag-stats li {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.8rem;
+}
+.flagship-research .flag-stats li { border-color: rgba(251,191,36,0.25); }
+.flag-stats strong {
+  display: block;
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--amber);
+  line-height: 1.2;
+}
+.flag-stats span { display: block; font-size: 0.7rem; color: var(--text-muted); line-height: 1.3; }
+
+.flagship-research .tag {
+  color: var(--amber);
+  background: rgba(251,191,36,0.08);
+  border-color: rgba(251,191,36,0.25);
+}
+.flag-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1.2rem; }
+
+/* product flagship: visual left, copy right */
+.flagship-product { grid-template-columns: 0.9fr 1.1fr; align-items: center; }
+.fp-visual {
+  background: radial-gradient(circle at 30% 20%, rgba(96,165,250,0.14), transparent 60%), var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+}
+.fp-visual svg, .fp-visual img { display: block; width: 100%; height: auto; }
+.fp-visual img { border-radius: 6px; }
+
+/* research flagship: header, stats, then chart + findings */
+.flagship-research { grid-template-columns: 1fr; gap: 1.4rem; }
+.fr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; align-items: start; }
+.fr-chart {
+  margin: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+}
+.fr-chart svg { display: block; width: 100%; height: auto; }
+.fr-chart figcaption { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.5rem; }
+
+@media (max-width: 760px) {
+  .flagship { padding: 1.3rem; }
+  .flagship-product, .fr-grid { grid-template-columns: 1fr; }
+  .flag-stats { grid-template-columns: repeat(2, 1fr); }
+}
+.status-badge.ongoing {
+  color: var(--amber);
+  background: rgba(251,191,36,0.08);
+  border-color: rgba(251,191,36,0.35);
+}
+.status-badge.ongoing::before { content: '● '; font-size: 0.6em; }
+
 /* ── ACCESSIBILITY ── */
 :focus-visible {
   outline: 2px solid var(--accent);
@@ -1068,6 +1200,7 @@ input:focus-visible, textarea:focus-visible {
 <nav aria-label="Main">
   <a href="#about">about</a>
   <a href="#experience">experience</a>
+  <a href="#featured">featured</a>
   <a href="#data-science">data science</a>
   <a href="#technology">technology</a>
   <a href="#skills">skills</a>
@@ -1104,18 +1237,6 @@ input:focus-visible, textarea:focus-visible {
 
       <div class="exp-card current">
         <div class="exp-header">
-          <div class="exp-title">Web/UX Redesign & Development Lead<br>UTO Taekwondo</div>
-          <div class="exp-date">May 2026 – Present</div>
-        </div>
-        <ul>
-          <li>Leading the end-to-end redesign of a 10+ page responsive web platform using Next.js 16, React 19, and Tailwind CSS v4.</li>
-          <li>Implementing UX research, 4+ prototypes, and usability testing to translate the needs of 200+ customers and organizational leadership into accessible, user-centered experiences.</li>
-          <li>Preparing the platform for launch through reusable component architecture, 70+ production gallery assets, SEO/performance optimization, accessibility QA, Formspree integration, and Vercel deployment.</li>
-        </ul>
-      </div>
-
-      <div class="exp-card current">
-        <div class="exp-header">
           <div class="exp-title">Research Assistant — <span>Social Network Analysis (MR-QAP)</span><br>Chapman University</div>
           <div class="exp-date">Mar 2026 – Present</div>
         </div>
@@ -1126,9 +1247,21 @@ input:focus-visible, textarea:focus-visible {
         </ul>
       </div>
 
-      <div class="exp-card current">
+      <div class="exp-card">
         <div class="exp-header">
-          <div class="exp-title">S.E.A. Teaching Assistant — <span>Mobile App Usability & Interaction Design</span><br>Chapman University</div>
+          <div class="exp-title">Web/UX Redesign &amp; Development Lead<br>UTO Taekwondo</div>
+          <div class="exp-date">May 2026 – November 2026</div>
+        </div>
+        <ul>
+          <li>Led the end-to-end redesign and development of a 10+ page responsive website for an organization serving 200+ customers, directing UX/UI design, wireframing, information architecture, and iterative prototyping with stakeholder feedback.</li>
+          <li>Built the front end with Next.js 16, React 19, TypeScript, and Tailwind CSS v4, including interactive multimedia features with 70+ gallery images across five categories.</li>
+          <li>Managed production deployment through GitHub and Vercel, contributing 160+ hours from initial planning through final stakeholder approval and launch.</li>
+        </ul>      
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div class="exp-title">S.E.A. Teaching Assistant — <span>Mobile App Usability &amp; Interaction Design</span><br>Chapman University</div>
           <div class="exp-date">June 2026 – July 2026</div>
         </div>
         <ul>
@@ -1138,7 +1271,7 @@ input:focus-visible, textarea:focus-visible {
         </ul>
       </div>
 
-      <div class="exp-card current">
+      <div class="exp-card">
         <div class="exp-header">
           <div class="exp-title">Academic Tutor<br>Chapman University</div>
           <div class="exp-date">Sep 2024 – May 2026</div>
@@ -1150,9 +1283,9 @@ input:focus-visible, textarea:focus-visible {
         </ul>
       </div>
 
-      <div class="exp-card current">
+      <div class="exp-card">
         <div class="exp-header">
-          <div class="exp-title">Student Assistant — <span>Office of Accreditation & Assessment</span><br>Chapman University</div>
+          <div class="exp-title">Student Assistant — <span>Office of Accreditation &amp; Assessment</span><br>Chapman University</div>
           <div class="exp-date">Jun 2025 – Aug 2025</div>
         </div>
         <ul>
@@ -1162,7 +1295,7 @@ input:focus-visible, textarea:focus-visible {
         </ul>
       </div>
 
-      <div class="exp-card current">
+      <div class="exp-card">
         <div class="exp-header">
           <div class="exp-title">Teaching Assistant — <span>Summer Engineering Academy (Arduino Cars)</span><br>Chapman University</div>
           <div class="exp-date">Jun 2025 – Jul 2025</div>
@@ -1174,10 +1307,158 @@ input:focus-visible, textarea:focus-visible {
         </ul>
       </div>
 
-    </div>
+    </div>    
     <a href="https://www.linkedin.com/in/ethan-e-lopez" target="_blank" class="linkedin-link">
       ↗ View additional experience on LinkedIn (including Senior Leadership Instructor at UTO Taekwondo)
     </a>
+  </section>
+
+  <section id="featured">
+    <div class="section-label">03 // featured</div>
+    <h2>Featured Projects</h2>
+    <p class="section-intro">Two flagship projects: a production website I led from research to launch, and applied research on how to form better student teams.</p>
+
+    <div class="featured-stack">
+
+      <!-- ===== FLAGSHIP 1: UTO TAEKWONDO ===== -->
+      <article class="flagship flagship-product" aria-labelledby="uto-title">
+        <div class="fp-visual">
+          <!-- Illustrative wireframe. To use a real screenshot instead, replace this <svg> with:
+               <img src="uto-preview.png" alt="Screenshot of the UTO Taekwondo website" width="1200" height="750" loading="lazy"> -->
+          <svg viewBox="0 0 480 330" role="img" aria-label="Illustrative wireframe of a responsive website shown in a desktop browser and on a phone">
+            <rect x="10" y="20" width="360" height="270" rx="10" fill="#111827" stroke="rgba(99,179,237,0.35)"/>
+            <path d="M10 46V30a10 10 0 0 1 10-10h340a10 10 0 0 1 10 10v16z" fill="#1f2937"/>
+            <circle cx="26" cy="33" r="4" fill="#fb7185"/><circle cx="40" cy="33" r="4" fill="#fbbf24"/><circle cx="54" cy="33" r="4" fill="#68d391"/>
+            <rect x="74" y="26" width="170" height="14" rx="7" fill="#0b1120"/>
+            <text x="86" y="36" font-family="monospace" font-size="8" fill="#94a3b8">utotaekwondo.com</text>
+
+            <rect x="26" y="60" width="44" height="9" rx="4" fill="#60a5fa"/>
+            <rect x="190" y="61" width="28" height="6" rx="3" fill="#334155"/><rect x="226" y="61" width="28" height="6" rx="3" fill="#334155"/>
+            <rect x="262" y="61" width="28" height="6" rx="3" fill="#334155"/><rect x="298" y="61" width="28" height="6" rx="3" fill="#334155"/>
+
+            <rect x="26" y="92" width="150" height="13" rx="3" fill="#f8fafc"/><rect x="26" y="111" width="104" height="13" rx="3" fill="#f8fafc"/>
+            <rect x="26" y="136" width="168" height="5" rx="2" fill="#475569"/><rect x="26" y="146" width="136" height="5" rx="2" fill="#475569"/>
+            <rect x="26" y="162" width="72" height="18" rx="5" fill="#60a5fa"/>
+            <rect x="106" y="162" width="62" height="18" rx="5" fill="none" stroke="#60a5fa"/>
+            <rect x="214" y="86" width="142" height="98" rx="8" fill="#1f2937"/>
+            <circle cx="285" cy="135" r="28" fill="#4fd1c5" opacity="0.22"/><circle cx="285" cy="135" r="14" fill="#60a5fa" opacity="0.5"/>
+
+            <rect x="26" y="204" width="100" height="70" rx="6" fill="#1f2937"/>
+            <rect x="136" y="204" width="100" height="70" rx="6" fill="#1f2937"/>
+            <rect x="246" y="204" width="100" height="70" rx="6" fill="#1f2937"/>
+            <rect x="36" y="214" width="14" height="14" rx="4" fill="#60a5fa" opacity="0.6"/><rect x="36" y="236" width="60" height="5" rx="2" fill="#cbd5e1"/><rect x="36" y="247" width="78" height="4" rx="2" fill="#475569"/><rect x="36" y="256" width="64" height="4" rx="2" fill="#475569"/>
+            <rect x="146" y="214" width="14" height="14" rx="4" fill="#4fd1c5" opacity="0.6"/><rect x="146" y="236" width="60" height="5" rx="2" fill="#cbd5e1"/><rect x="146" y="247" width="78" height="4" rx="2" fill="#475569"/><rect x="146" y="256" width="64" height="4" rx="2" fill="#475569"/>
+            <rect x="256" y="214" width="14" height="14" rx="4" fill="#fbbf24" opacity="0.6"/><rect x="256" y="236" width="60" height="5" rx="2" fill="#cbd5e1"/><rect x="256" y="247" width="78" height="4" rx="2" fill="#475569"/><rect x="256" y="256" width="64" height="4" rx="2" fill="#475569"/>
+
+            <rect x="372" y="64" width="100" height="250" rx="16" fill="#0b1120" stroke="#4fd1c5" stroke-width="2"/>
+            <rect x="410" y="72" width="24" height="4" rx="2" fill="#1f2937"/>
+            <rect x="384" y="88" width="30" height="6" rx="3" fill="#60a5fa"/>
+            <rect x="446" y="88" width="14" height="2" rx="1" fill="#94a3b8"/><rect x="446" y="93" width="14" height="2" rx="1" fill="#94a3b8"/><rect x="446" y="98" width="14" height="2" rx="1" fill="#94a3b8"/>
+            <rect x="384" y="108" width="70" height="9" rx="2" fill="#f8fafc"/><rect x="384" y="122" width="50" height="9" rx="2" fill="#f8fafc"/>
+            <rect x="384" y="140" width="70" height="4" rx="2" fill="#475569"/><rect x="384" y="148" width="56" height="4" rx="2" fill="#475569"/>
+            <rect x="384" y="160" width="76" height="16" rx="5" fill="#60a5fa"/>
+            <rect x="384" y="188" width="76" height="54" rx="6" fill="#1f2937"/><circle cx="422" cy="215" r="14" fill="#4fd1c5" opacity="0.25"/>
+            <rect x="384" y="250" width="76" height="22" rx="5" fill="#1f2937"/><rect x="384" y="278" width="76" height="22" rx="5" fill="#1f2937"/>
+          </svg>
+        </div>
+
+        <div class="fp-body">
+          <div class="flag-top">
+            <span class="flag-kicker">Flagship · Digital product</span>
+            <span class="status-badge">Completed · Nov 2026</span>
+          </div>
+          <h3 id="uto-title">UTO Taekwondo Digital Platform Redesign</h3>
+          <p class="flag-lede">Led the transformation of UTO Taekwondo's legacy Wix website into a production, responsive web application for an organization serving 200+ customers.</p>
+
+          <dl class="flag-rows">
+            <div><dt>Problem</dt><dd>A legacy Wix website that needed to become a modern, responsive web application for an organization serving 200+ customers.</dd></div>
+            <div><dt>Approach</dt><dd>Led UX research, wireframing, information architecture, and UI/UX design, refining 4+ prototypes with stakeholder feedback and translating leadership's business requirements into technical specifications.</dd></div>
+            <div><dt>Build</dt><dd>Next.js 16, React 19, TypeScript, and Tailwind CSS v4 with the App Router, typed data, and reusable components: program pages, testimonials, FAQs, lightboxes, video galleries, interactive modals, and downloadable scheduling resources.</dd></div>
+            <div><dt>Delivery</dt><dd>Launched to production on GitHub and Vercel with Formspree forms, SEO metadata, sitemap, robots configuration, Open Graph metadata, HTTPS, accessibility checks, and cross-device testing, through final stakeholder approval.</dd></div>
+          </dl>
+
+          <ul class="flag-stats">
+            <li><strong>160+</strong><span>hours, planning to launch</span></li>
+            <li><strong>10+</strong><span>page responsive platform</span></li>
+            <li><strong>70+</strong><span>gallery images, 5 categories</span></li>
+            <li><strong>4+</strong><span>design prototypes</span></li>
+          </ul>
+
+          <div class="tags">
+            <span class="tag">Next.js 16</span><span class="tag">React 19</span><span class="tag">TypeScript</span><span class="tag">Tailwind CSS v4</span><span class="tag">UX Research</span><span class="tag">Responsive Design</span><span class="tag">Vercel</span><span class="tag">SEO</span><span class="tag">Accessibility</span>
+          </div>
+
+          <div class="flag-actions">
+            <a href="https://www.utotaekwondo.com/" class="btn-primary" target="_blank" rel="noopener noreferrer" aria-label="View live website: UTO Taekwondo Digital Platform Redesign">View live website</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===== FLAGSHIP 2: DISCO BALL RESEARCH ===== -->
+      <article class="flagship flagship-research" aria-labelledby="disco-title">
+        <div>
+          <div class="flag-top">
+            <span class="status-badge ongoing">Ongoing research</span>
+            <span class="flag-kicker">Flagship · Applied research · Chapman University</span>
+          </div>
+          <h3 id="disco-title">Disco Ball: Algorithmic-Driven Student Team Formation</h3>
+          <p class="flag-lede">Disco Ball is a collaborative, survey-based platform that uses 30+ multiple-choice questions on communication preferences, working styles, and behavioral characteristics to form long-term student teams algorithmically. My role centered on the research and statistical analysis behind it.</p>
+        </div>
+
+        <ul class="flag-stats">
+          <li><strong>240+</strong><span>first-year STEM students, 11 class sections</span></li>
+          <li><strong>0.644</strong><span>R², complementary work styles</span></li>
+          <li><strong>0.176</strong><span>R², similarity-based grouping</span></li>
+          <li><strong>p &lt; .001</strong><span>ANOVA, F(2, 236) = 25.75</span></li>
+        </ul>
+
+        <div class="fr-grid">
+          <figure class="fr-chart">
+            <svg viewBox="0 0 420 230" role="img" aria-label="Bar chart of variance explained in team formation outcomes: complementary work styles R squared 0.644 versus similarity-based grouping R squared 0.176">
+              <defs><linearGradient id="dbBar" x1="0" x2="1"><stop offset="0" stop-color="#60a5fa"/><stop offset="1" stop-color="#4fd1c5"/></linearGradient></defs>
+              <text x="20" y="26" font-family="monospace" font-size="11" fill="#94a3b8">VARIANCE EXPLAINED (R²)</text>
+              <g stroke="rgba(96,165,250,0.35)" stroke-width="1">
+                <line x1="338" y1="22" x2="372" y2="12"/><line x1="338" y1="22" x2="362" y2="46"/><line x1="372" y1="12" x2="404" y2="30"/><line x1="362" y1="46" x2="404" y2="30"/>
+              </g>
+              <circle cx="338" cy="22" r="4" fill="#60a5fa"/><circle cx="372" cy="12" r="3" fill="#4fd1c5"/><circle cx="362" cy="46" r="3" fill="#fbbf24"/><circle cx="404" cy="30" r="4" fill="#4fd1c5"/>
+
+              <text x="20" y="72" font-family="monospace" font-size="11" fill="#cbd5e1">Complementary work styles</text>
+              <rect x="20" y="82" width="380" height="24" rx="5" fill="#1f2937"/>
+              <rect x="20" y="82" width="244.7" height="24" rx="5" fill="url(#dbBar)"/>
+              <text x="272" y="99" font-family="monospace" font-size="13" font-weight="600" fill="#fbbf24">0.644</text>
+
+              <text x="20" y="140" font-family="monospace" font-size="11" fill="#cbd5e1">Similarity-based grouping</text>
+              <rect x="20" y="150" width="380" height="24" rx="5" fill="#1f2937"/>
+              <rect x="20" y="150" width="66.9" height="24" rx="5" fill="#64748b"/>
+              <text x="94" y="167" font-family="monospace" font-size="13" font-weight="600" fill="#fbbf24">0.176</text>
+
+              <line x1="20" y1="192" x2="400" y2="192" stroke="#334155"/>
+              <line x1="20" y1="192" x2="20" y2="197" stroke="#334155"/><line x1="210" y1="192" x2="210" y2="197" stroke="#334155"/><line x1="400" y1="192" x2="400" y2="197" stroke="#334155"/>
+              <text x="20" y="211" font-family="monospace" font-size="10" fill="#94a3b8">0</text>
+              <text x="210" y="211" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="middle">0.5</text>
+              <text x="400" y="211" font-family="monospace" font-size="10" fill="#94a3b8" text-anchor="end">1.0</text>
+            </svg>
+            <figcaption>Share of team formation outcomes explained by each grouping approach.</figcaption>
+          </figure>
+
+          <dl class="flag-rows">
+            <div><dt>Problem</dt><dd>Random assignment and similarity-based grouping can produce poorly functioning teams, communication challenges, and reduced retention.</dd></div>
+            <div><dt>Compared</dt><dd>Three team-formation approaches: random assignment, similarity-based grouping, and complementary (diverse) communication styles.</dd></div>
+            <div><dt>My contribution</dt><dd>Processed survey data from 240+ first-year STEM students; applied ANOVA, post-hoc testing, and MR-QAP social network analysis in Python; built visualizations, metrics, and comparative analyses; and worked with faculty and research colleagues to validate the approaches.</dd></div>
+            <div><dt>Finding</dt><dd>Complementary work styles explained 64.4% of team formation outcomes versus 17.6% for similarity-based grouping, a statistically significant difference between approaches. In plain terms, how well teammates' styles complement each other was a far stronger signal than how alike they are.</dd></div>
+          </dl>
+        </div>
+
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">ANOVA</span><span class="tag">Post-hoc Testing</span><span class="tag">MR-QAP</span><span class="tag">Social Network Analysis</span><span class="tag">Data Visualization</span><span class="tag">Behavioral Analytics</span>
+        </div>
+
+        <div class="flag-actions">
+          <a href="https://docs.google.com/presentation/d/1TAfVt2ADanOz2d5-gLyW1b-VvWHWD-37OMm6tZi5Qe0/edit?usp=sharing" class="btn" target="_blank" rel="noopener noreferrer" aria-label="Research Poster: Disco Ball student team formation">Research Poster</a>
+        </div>
+      </article>
+
+    </div>
   </section>
 
   <section id="data-science">
@@ -1186,16 +1467,6 @@ input:focus-visible, textarea:focus-visible {
     <p class="section-intro">Machine learning, statistical analysis, research, business intelligence, and data-driven decision making.</p>
 
     <div class="projects-grid">
-
-      <div class="project-card">
-        <div class="card-top"><svg class="card-icon" aria-hidden="true"><use href="#i-network"/></svg><span class="metric"><strong>240+</strong> STEM students</span></div>
-        <h3>Algorithm-Driven Student Team Formation Research</h3>
-        <p>Analyzed team formation outcomes from 240+ STEM students using ANOVA, post-hoc testing, Social Network Analysis, and MR-QAP to investigate how communication diversity influences team persistence and collaboration.</p>
-        <div class="tags">
-          <span class="tag">Python</span><span class="tag">MR-QAP</span><span class="tag">SNA</span><span class="tag">ANOVA</span><span class="tag">Behavioral Analytics</span>
-        </div>
-        <a href="https://docs.google.com/presentation/d/1TAfVt2ADanOz2d5-gLyW1b-VvWHWD-37OMm6tZi5Qe0/edit?usp=sharing" class="btn" target="_blank">Research Poster</a>
-      </div>
 
       <div class="project-card">
         <div class="card-top"><svg class="card-icon" aria-hidden="true"><use href="#i-layers"/></svg><span class="metric"><strong>0.92</strong> ROC-AUC</span></div>
@@ -1256,16 +1527,6 @@ input:focus-visible, textarea:focus-visible {
     <p class="section-intro">Software engineering, systems development, product design, user experience, and technical problem solving.</p>
 
     <div class="projects-grid">
-
-      <div class="project-card">
-        <div class="card-top"><svg class="card-icon" aria-hidden="true"><use href="#i-layout"/></svg><span class="metric"><strong>10+</strong> pages</span></div>
-        <h3>UTO Taekwondo Digital Platform Redesign <span style="font-size:0.7rem; color: var(--accent-2); font-family: var(--mono); margin-left: 6px;">in progress</span></h3>
-        <p>Leading the redesign of a real-world organizational website, improving user experience, appointment scheduling workflows, mobile responsiveness, and long-term scalability.</p>
-        <div class="tags">
-          <span class="tag">UX Design</span><span class="tag">Web Dev</span><span class="tag">Product Design</span><span class="tag">Usability Testing</span>
-        </div>
-        <a href="https://www.utotaekwondo.com/" class="btn" target="_blank">View Website</a>
-      </div>
 
       <div class="project-card">
         <div class="card-top"><svg class="card-icon" aria-hidden="true"><use href="#i-layout"/></svg></div>
@@ -1576,7 +1837,7 @@ document.querySelectorAll('section[id]').forEach(s => navObserver.observe(s));
 document.querySelectorAll('.project-card .btn').forEach(a => {
   const title = a.closest('.project-card').querySelector('h3');
   if (title) {
-    const name = title.textContent.replace(/in progress/i, '').trim();
+    const name = title.textContent.trim();
     a.setAttribute('aria-label', a.textContent.trim() + ': ' + name);
   }
 });
