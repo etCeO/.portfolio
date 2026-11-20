@@ -1071,9 +1071,11 @@ header { animation: fadeIn 0.7s ease forwards; }
 .status-badge.ongoing::before { content: '● '; font-size: 0.6em; }
 
 /* ── PROJECT GALLERIES ── */
+/* UTO card is now: header, gallery, details */
+.flagship-product { grid-template-columns: 1fr; align-items: stretch; gap: 1.6rem; }
+.flagship-product .flag-rows { grid-template-columns: 1fr 1fr; gap: 1.1rem 2rem; }
 .flag-gallery { grid-column: 1 / -1; }
-.shot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.shot-grid.two { grid-template-columns: repeat(2, 1fr); }
+
 .shot { margin: 0; }
 .shot button {
   display: block;
@@ -1084,15 +1086,41 @@ header { animation: fadeIn 0.7s ease forwards; }
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  aspect-ratio: 3 / 2;
-  transition: border-color 0.2s, transform 0.2s;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
-.shot button:hover { border-color: var(--accent); transform: translateY(-2px); }
+.shot button:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
 .flagship-research .shot button:hover { border-color: var(--amber); }
-.shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
-.shot.contain img { object-fit: contain; }
-.shot figcaption { font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem; }
+.shot.white button { background: #fff; }
+.shot img { display: block; width: 100%; height: auto; }
 
+.uto-gallery, .disco-gallery { display: grid; gap: 14px; align-items: start; }
+
+/* UTO: two landscape shots stacked, phone beside them at the same height */
+.uto-gallery { grid-template-columns: 1.65fr 1fr; }
+.uto-gallery .g-home    { grid-area: 1 / 1; }
+.uto-gallery .g-feature { grid-area: 2 / 1; }
+.uto-gallery .g-phone   { grid-area: 1 / 2 / 3 / 3; }
+
+/* Disco Ball: network on the left, platform + chart stacked on the right */
+.disco-gallery { grid-template-columns: 1.54fr 1fr; }
+.disco-gallery .g-platform { grid-area: 1 / 2; }
+.disco-gallery .g-chart    { grid-area: 2 / 2; }
+.disco-gallery .g-network  { grid-area: 1 / 1 / 3 / 2; }
+
+/* tall images that fill the height of the two stacked images beside them */
+.g-span { align-self: stretch; display: flex; }
+.g-span button { flex: 1; position: relative; }
+.g-span img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+
+/* subtle device frame for the phone screenshot */
+.g-phone button { background: #05080f; border: 1px solid var(--border-hover); border-radius: 26px; }
+.g-phone img { inset: 8px; width: calc(100% - 16px); height: calc(100% - 16px); border-radius: 18px; }
+
+/* lightbox */
 .lightbox {
   margin: auto;
   padding: 0;
@@ -1105,8 +1133,7 @@ header { animation: fadeIn 0.7s ease forwards; }
 }
 .lightbox::backdrop { background: rgba(5,8,16,0.85); }
 .lightbox-inner { padding: 1rem; }
-.lightbox img { display: block; max-width: 100%; max-height: 76vh; margin: 0 auto; border-radius: 6px; }
-.lightbox p { font-family: var(--mono); font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 0.7rem; }
+.lightbox img { display: block; max-width: 100%; max-height: 82vh; margin: 0 auto; border-radius: 6px; }
 .lightbox-close {
   position: absolute;
   top: 0.5rem;
@@ -1121,7 +1148,14 @@ header { animation: fadeIn 0.7s ease forwards; }
 }
 
 @media (max-width: 760px) {
-  .shot-grid, .shot-grid.two { grid-template-columns: 1fr; }
+  .flagship-product .flag-rows { grid-template-columns: 1fr; }
+  .uto-gallery, .disco-gallery { grid-template-columns: 1fr; }
+  .uto-gallery > .shot, .disco-gallery > .shot { grid-area: auto; }
+  .g-span { display: block; }
+  .g-span button { position: static; }
+  .g-span img { position: static; width: 100%; height: auto; }
+  .g-phone { width: min(100%, 280px); margin-inline: auto; }
+  .g-phone button { padding: 8px; }
 }
 
 /* ── ACCESSIBILITY ── */
@@ -1376,22 +1410,36 @@ input:focus-visible, textarea:focus-visible {
 
       <!-- ===== FLAGSHIP 1: UTO TAEKWONDO ===== -->
       <article class="flagship flagship-product" aria-labelledby="uto-title">
-        <div class="fp-visual">
-          <figure class="shot">
-            <button type="button" aria-label="Enlarge screenshot: UTO Taekwondo homepage">
-              <img src="images/uto-home.jpg" alt="Homepage of the UTO Taekwondo website showing the hero section and branding" width="1200" height="800" loading="lazy" decoding="async">
-            </button>
-            <figcaption>Production homepage</figcaption>
-          </figure>
-        </div>
 
-        <div class="fp-body">
+        <div class="flag-head">
           <div class="flag-top">
             <span class="flag-kicker">Flagship · Digital product</span>
             <span class="status-badge">Completed · Nov 2026</span>
           </div>
           <h3 id="uto-title">UTO Taekwondo Digital Platform Redesign</h3>
           <p class="flag-lede">Led the transformation of UTO Taekwondo's legacy Wix website into a production, responsive web application for an organization serving 200+ customers.</p>
+
+        </div>
+
+        <div class="flag-gallery uto-gallery">
+          <figure class="shot g-home">
+            <button type="button" aria-label="Enlarge screenshot: UTO Taekwondo homepage">
+              <img src="images/uto-home.jpg" alt="Homepage of the UTO Taekwondo website with the hero headline and a photo of students in class" width="1200" height="750" loading="lazy" decoding="async">
+            </button>
+          </figure>
+          <figure class="shot g-phone g-span">
+            <button type="button" aria-label="Enlarge screenshot: UTO Taekwondo on mobile">
+              <img src="images/uto-mobile.jpg" alt="UTO Taekwondo programs page on a phone, showing the responsive layout and mobile navigation" width="552" height="1200" loading="lazy" decoding="async">
+            </button>
+          </figure>
+          <figure class="shot g-feature">
+            <button type="button" aria-label="Enlarge screenshot: UTO Taekwondo photo gallery page">
+              <img src="images/uto-feature.jpg" alt="UTO Taekwondo photo gallery page showing a grid of class photos" width="1200" height="750" loading="lazy" decoding="async">
+            </button>
+          </figure>
+        </div>
+    
+        <div class="flag-details">
 
           <dl class="flag-rows">
             <div><dt>Problem</dt><dd>A legacy Wix website that needed to become a modern, responsive web application for an organization serving 200+ customers.</dd></div>
@@ -1416,23 +1464,6 @@ input:focus-visible, textarea:focus-visible {
           </div>
         </div>
 
-        <div class="flag-gallery">
-          <div class="shot-grid two">
-            <figure class="shot contain">
-              <button type="button" aria-label="Enlarge screenshot: UTO Taekwondo on mobile">
-                <img src="images/uto-mobile.jpg" alt="UTO Taekwondo website on a phone, showing the responsive layout and navigation" width="1200" height="800" loading="lazy" decoding="async">
-              </button>
-              <figcaption>Responsive mobile layout</figcaption>
-            </figure>
-            <figure class="shot">
-              <button type="button" aria-label="Enlarge screenshot: UTO Taekwondo gallery feature">
-                <img src="images/uto-feature.jpg" alt="UTO Taekwondo website gallery feature with lightbox" width="1200" height="800" loading="lazy" decoding="async">
-              </button>
-              <figcaption>Gallery and interactive features</figcaption>
-            </figure>
-          </div>
-        </div>
-
       </article>
 
       <!-- ===== FLAGSHIP 2: DISCO BALL RESEARCH ===== -->
@@ -1452,6 +1483,24 @@ input:focus-visible, textarea:focus-visible {
           <li><strong>0.176</strong><span>R², similarity-based grouping</span></li>
           <li><strong>p &lt; .001</strong><span>ANOVA, F(2, 236) = 25.75</span></li>
         </ul>
+
+        <div class="flag-gallery disco-gallery">
+          <figure class="shot white g-platform">
+            <button type="button" aria-label="Enlarge image: Disco Ball platform screens">
+              <img src="images/disco-platform.jpg" alt="Three screens of the Disco Ball survey app: the welcome screen, a learning-style question, and the download screen" width="1200" height="720" loading="lazy" decoding="async">
+            </button>
+          </figure>
+          <figure class="shot white g-chart">
+            <button type="button" aria-label="Enlarge image: distribution of common members by algorithm type">
+              <img src="images/disco-chart.jpg" alt="Bar chart of the distribution of common members count by algorithm type, comparing matches, random, and communication-based groupings" width="1200" height="743" loading="lazy" decoding="async">
+            </button>
+          </figure>
+          <figure class="shot white g-network g-span">
+            <button type="button" aria-label="Enlarge image: network of Disco Ball group pairings">
+              <img src="images/disco-network.jpg" alt="Network graph of Disco Ball group to final group pairings from the social network analysis" width="1200" height="982" loading="lazy" decoding="async">
+            </button>
+          </figure>
+        </div>
 
         <div class="fr-grid">
           <figure class="fr-chart">
@@ -1488,29 +1537,6 @@ input:focus-visible, textarea:focus-visible {
             <div><dt>My contribution</dt><dd>Processed survey data from 240+ first-year STEM students; applied ANOVA, post-hoc testing, and MR-QAP social network analysis in Python; built visualizations, metrics, and comparative analyses; and worked with faculty and research colleagues to validate the approaches.</dd></div>
             <div><dt>Finding</dt><dd>Complementary work styles explained 64.4% of team formation outcomes versus 17.6% for similarity-based grouping, a statistically significant difference between approaches. In plain terms, how well teammates' styles complement each other was a far stronger signal than how alike they are.</dd></div>
           </dl>
-        </div>
-
-        <div class="flag-gallery">
-          <div class="shot-grid">
-            <figure class="shot">
-              <button type="button" aria-label="Enlarge image: Disco Ball platform interface">
-                <img src="images/disco-platform.jpg" alt="Disco Ball survey platform interface used to collect student responses" width="1200" height="800" loading="lazy" decoding="async">
-              </button>
-              <figcaption>Platform interface</figcaption>
-            </figure>
-            <figure class="shot">
-              <button type="button" aria-label="Enlarge image: team formation comparison chart">
-                <img src="images/disco-chart.jpg" alt="Statistical chart comparing team formation approaches from the Disco Ball research" width="1200" height="800" loading="lazy" decoding="async">
-              </button>
-              <figcaption>Statistical comparison of approaches</figcaption>
-            </figure>
-            <figure class="shot">
-              <button type="button" aria-label="Enlarge image: social network analysis visualization">
-                <img src="images/disco-network.jpg" alt="Social network analysis visualization of team relationships from the MR-QAP research" width="1200" height="800" loading="lazy" decoding="async">
-              </button>
-              <figcaption>Social network analysis</figcaption>
-            </figure>
-          </div>
         </div>
 
         <div class="tags">
@@ -1879,7 +1905,6 @@ input:focus-visible, textarea:focus-visible {
   <div class="lightbox-inner">
     <button type="button" class="lightbox-close" aria-label="Close image viewer">✕</button>
     <img id="lightbox-img" src="" alt="">
-    <p id="lightbox-caption"></p>
   </div>
 </dialog>
 
@@ -1916,13 +1941,11 @@ document.querySelectorAll('.project-card .btn').forEach(a => {
 const lb = document.getElementById('lightbox');
 if (lb) {
   const lbImg = document.getElementById('lightbox-img');
-  const lbCap = document.getElementById('lightbox-caption');
   document.querySelectorAll('.shot button').forEach(btn => {
     btn.addEventListener('click', () => {
       const img = btn.querySelector('img');
       lbImg.src = img.currentSrc || img.src;
       lbImg.alt = img.alt;
-      lbCap.textContent = btn.closest('.shot').querySelector('figcaption').textContent;
       lb.showModal();
     });
   });
