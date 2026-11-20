@@ -1070,6 +1070,60 @@ header { animation: fadeIn 0.7s ease forwards; }
 }
 .status-badge.ongoing::before { content: '● '; font-size: 0.6em; }
 
+/* ── PROJECT GALLERIES ── */
+.flag-gallery { grid-column: 1 / -1; }
+.shot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.shot-grid.two { grid-template-columns: repeat(2, 1fr); }
+.shot { margin: 0; }
+.shot button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  cursor: zoom-in;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.shot button:hover { border-color: var(--accent); transform: translateY(-2px); }
+.flagship-research .shot button:hover { border-color: var(--amber); }
+.shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.shot.contain img { object-fit: contain; }
+.shot figcaption { font-family: var(--mono); font-size: 0.7rem; color: var(--text-muted); margin-top: 0.5rem; }
+
+.lightbox {
+  margin: auto;
+  padding: 0;
+  max-width: min(1100px, 94vw);
+  max-height: 92vh;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-lg);
+}
+.lightbox::backdrop { background: rgba(5,8,16,0.85); }
+.lightbox-inner { padding: 1rem; }
+.lightbox img { display: block; max-width: 100%; max-height: 76vh; margin: 0 auto; border-radius: 6px; }
+.lightbox p { font-family: var(--mono); font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 0.7rem; }
+.lightbox-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--border-hover);
+  border-radius: 50%;
+}
+
+@media (max-width: 760px) {
+  .shot-grid, .shot-grid.two { grid-template-columns: 1fr; }
+}
+
 /* ── ACCESSIBILITY ── */
 :focus-visible {
   outline: 2px solid var(--accent);
@@ -1323,43 +1377,12 @@ input:focus-visible, textarea:focus-visible {
       <!-- ===== FLAGSHIP 1: UTO TAEKWONDO ===== -->
       <article class="flagship flagship-product" aria-labelledby="uto-title">
         <div class="fp-visual">
-          <!-- Illustrative wireframe. To use a real screenshot instead, replace this <svg> with:
-               <img src="uto-preview.png" alt="Screenshot of the UTO Taekwondo website" width="1200" height="750" loading="lazy"> -->
-          <svg viewBox="0 0 480 330" role="img" aria-label="Illustrative wireframe of a responsive website shown in a desktop browser and on a phone">
-            <rect x="10" y="20" width="360" height="270" rx="10" fill="#111827" stroke="rgba(99,179,237,0.35)"/>
-            <path d="M10 46V30a10 10 0 0 1 10-10h340a10 10 0 0 1 10 10v16z" fill="#1f2937"/>
-            <circle cx="26" cy="33" r="4" fill="#fb7185"/><circle cx="40" cy="33" r="4" fill="#fbbf24"/><circle cx="54" cy="33" r="4" fill="#68d391"/>
-            <rect x="74" y="26" width="170" height="14" rx="7" fill="#0b1120"/>
-            <text x="86" y="36" font-family="monospace" font-size="8" fill="#94a3b8">utotaekwondo.com</text>
-
-            <rect x="26" y="60" width="44" height="9" rx="4" fill="#60a5fa"/>
-            <rect x="190" y="61" width="28" height="6" rx="3" fill="#334155"/><rect x="226" y="61" width="28" height="6" rx="3" fill="#334155"/>
-            <rect x="262" y="61" width="28" height="6" rx="3" fill="#334155"/><rect x="298" y="61" width="28" height="6" rx="3" fill="#334155"/>
-
-            <rect x="26" y="92" width="150" height="13" rx="3" fill="#f8fafc"/><rect x="26" y="111" width="104" height="13" rx="3" fill="#f8fafc"/>
-            <rect x="26" y="136" width="168" height="5" rx="2" fill="#475569"/><rect x="26" y="146" width="136" height="5" rx="2" fill="#475569"/>
-            <rect x="26" y="162" width="72" height="18" rx="5" fill="#60a5fa"/>
-            <rect x="106" y="162" width="62" height="18" rx="5" fill="none" stroke="#60a5fa"/>
-            <rect x="214" y="86" width="142" height="98" rx="8" fill="#1f2937"/>
-            <circle cx="285" cy="135" r="28" fill="#4fd1c5" opacity="0.22"/><circle cx="285" cy="135" r="14" fill="#60a5fa" opacity="0.5"/>
-
-            <rect x="26" y="204" width="100" height="70" rx="6" fill="#1f2937"/>
-            <rect x="136" y="204" width="100" height="70" rx="6" fill="#1f2937"/>
-            <rect x="246" y="204" width="100" height="70" rx="6" fill="#1f2937"/>
-            <rect x="36" y="214" width="14" height="14" rx="4" fill="#60a5fa" opacity="0.6"/><rect x="36" y="236" width="60" height="5" rx="2" fill="#cbd5e1"/><rect x="36" y="247" width="78" height="4" rx="2" fill="#475569"/><rect x="36" y="256" width="64" height="4" rx="2" fill="#475569"/>
-            <rect x="146" y="214" width="14" height="14" rx="4" fill="#4fd1c5" opacity="0.6"/><rect x="146" y="236" width="60" height="5" rx="2" fill="#cbd5e1"/><rect x="146" y="247" width="78" height="4" rx="2" fill="#475569"/><rect x="146" y="256" width="64" height="4" rx="2" fill="#475569"/>
-            <rect x="256" y="214" width="14" height="14" rx="4" fill="#fbbf24" opacity="0.6"/><rect x="256" y="236" width="60" height="5" rx="2" fill="#cbd5e1"/><rect x="256" y="247" width="78" height="4" rx="2" fill="#475569"/><rect x="256" y="256" width="64" height="4" rx="2" fill="#475569"/>
-
-            <rect x="372" y="64" width="100" height="250" rx="16" fill="#0b1120" stroke="#4fd1c5" stroke-width="2"/>
-            <rect x="410" y="72" width="24" height="4" rx="2" fill="#1f2937"/>
-            <rect x="384" y="88" width="30" height="6" rx="3" fill="#60a5fa"/>
-            <rect x="446" y="88" width="14" height="2" rx="1" fill="#94a3b8"/><rect x="446" y="93" width="14" height="2" rx="1" fill="#94a3b8"/><rect x="446" y="98" width="14" height="2" rx="1" fill="#94a3b8"/>
-            <rect x="384" y="108" width="70" height="9" rx="2" fill="#f8fafc"/><rect x="384" y="122" width="50" height="9" rx="2" fill="#f8fafc"/>
-            <rect x="384" y="140" width="70" height="4" rx="2" fill="#475569"/><rect x="384" y="148" width="56" height="4" rx="2" fill="#475569"/>
-            <rect x="384" y="160" width="76" height="16" rx="5" fill="#60a5fa"/>
-            <rect x="384" y="188" width="76" height="54" rx="6" fill="#1f2937"/><circle cx="422" cy="215" r="14" fill="#4fd1c5" opacity="0.25"/>
-            <rect x="384" y="250" width="76" height="22" rx="5" fill="#1f2937"/><rect x="384" y="278" width="76" height="22" rx="5" fill="#1f2937"/>
-          </svg>
+          <figure class="shot">
+            <button type="button" aria-label="Enlarge screenshot: UTO Taekwondo homepage">
+              <img src="images/uto-home.jpg" alt="Homepage of the UTO Taekwondo website showing the hero section and branding" width="1200" height="800" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Production homepage</figcaption>
+          </figure>
         </div>
 
         <div class="fp-body">
@@ -1392,6 +1415,24 @@ input:focus-visible, textarea:focus-visible {
             <a href="https://www.utotaekwondo.com/" class="btn-primary" target="_blank" rel="noopener noreferrer" aria-label="View live website: UTO Taekwondo Digital Platform Redesign">View live website</a>
           </div>
         </div>
+
+        <div class="flag-gallery">
+          <div class="shot-grid two">
+            <figure class="shot contain">
+              <button type="button" aria-label="Enlarge screenshot: UTO Taekwondo on mobile">
+                <img src="images/uto-mobile.jpg" alt="UTO Taekwondo website on a phone, showing the responsive layout and navigation" width="1200" height="800" loading="lazy" decoding="async">
+              </button>
+              <figcaption>Responsive mobile layout</figcaption>
+            </figure>
+            <figure class="shot">
+              <button type="button" aria-label="Enlarge screenshot: UTO Taekwondo gallery feature">
+                <img src="images/uto-feature.jpg" alt="UTO Taekwondo website gallery feature with lightbox" width="1200" height="800" loading="lazy" decoding="async">
+              </button>
+              <figcaption>Gallery and interactive features</figcaption>
+            </figure>
+          </div>
+        </div>
+
       </article>
 
       <!-- ===== FLAGSHIP 2: DISCO BALL RESEARCH ===== -->
@@ -1447,6 +1488,29 @@ input:focus-visible, textarea:focus-visible {
             <div><dt>My contribution</dt><dd>Processed survey data from 240+ first-year STEM students; applied ANOVA, post-hoc testing, and MR-QAP social network analysis in Python; built visualizations, metrics, and comparative analyses; and worked with faculty and research colleagues to validate the approaches.</dd></div>
             <div><dt>Finding</dt><dd>Complementary work styles explained 64.4% of team formation outcomes versus 17.6% for similarity-based grouping, a statistically significant difference between approaches. In plain terms, how well teammates' styles complement each other was a far stronger signal than how alike they are.</dd></div>
           </dl>
+        </div>
+
+        <div class="flag-gallery">
+          <div class="shot-grid">
+            <figure class="shot">
+              <button type="button" aria-label="Enlarge image: Disco Ball platform interface">
+                <img src="images/disco-platform.jpg" alt="Disco Ball survey platform interface used to collect student responses" width="1200" height="800" loading="lazy" decoding="async">
+              </button>
+              <figcaption>Platform interface</figcaption>
+            </figure>
+            <figure class="shot">
+              <button type="button" aria-label="Enlarge image: team formation comparison chart">
+                <img src="images/disco-chart.jpg" alt="Statistical chart comparing team formation approaches from the Disco Ball research" width="1200" height="800" loading="lazy" decoding="async">
+              </button>
+              <figcaption>Statistical comparison of approaches</figcaption>
+            </figure>
+            <figure class="shot">
+              <button type="button" aria-label="Enlarge image: social network analysis visualization">
+                <img src="images/disco-network.jpg" alt="Social network analysis visualization of team relationships from the MR-QAP research" width="1200" height="800" loading="lazy" decoding="async">
+              </button>
+              <figcaption>Social network analysis</figcaption>
+            </figure>
+          </div>
         </div>
 
         <div class="tags">
@@ -1811,6 +1875,14 @@ input:focus-visible, textarea:focus-visible {
 
 <footer>© 2026 Ethan E. Lopez — Portfolio Website</footer>
 
+<dialog id="lightbox" class="lightbox" aria-label="Image viewer">
+  <div class="lightbox-inner">
+    <button type="button" class="lightbox-close" aria-label="Close image viewer">✕</button>
+    <img id="lightbox-img" src="" alt="">
+    <p id="lightbox-caption"></p>
+  </div>
+</dialog>
+
 <script>
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
@@ -1841,6 +1913,23 @@ document.querySelectorAll('.project-card .btn').forEach(a => {
     a.setAttribute('aria-label', a.textContent.trim() + ': ' + name);
   }
 });
+const lb = document.getElementById('lightbox');
+if (lb) {
+  const lbImg = document.getElementById('lightbox-img');
+  const lbCap = document.getElementById('lightbox-caption');
+  document.querySelectorAll('.shot button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const img = btn.querySelector('img');
+      lbImg.src = img.currentSrc || img.src;
+      lbImg.alt = img.alt;
+      lbCap.textContent = btn.closest('.shot').querySelector('figcaption').textContent;
+      lb.showModal();
+    });
+  });
+  lb.addEventListener('click', e => {
+    if (e.target === lb || e.target.closest('.lightbox-close')) lb.close();
+  });
+}
 </script>
 
 </body>
