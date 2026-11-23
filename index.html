@@ -37,6 +37,9 @@
   --text-dim: #8b98ad;
   --green: #68d391;
   --amber: #fbbf24;
+  --gold: #c9a559;
+  --gold-dim: rgba(201,165,89,0.10);
+  --gold-line: rgba(201,165,89,0.28);
   --mono: 'IBM Plex Mono', monospace;
   --sans: 'DM Sans', sans-serif;
   --radius: 6px;
@@ -1158,6 +1161,85 @@ header { animation: fadeIn 0.7s ease forwards; }
   .g-phone button { padding: 8px; }
 }
 
+/* ── HONORS & RECOGNITION ── */
+.awards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.award {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.6rem;
+  transition: border-color 0.2s;
+}
+.award:hover { border-color: var(--gold-line); }
+.award::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent 70%);
+}
+.award-featured { grid-column: 1 / -1; padding: 2rem; border-color: var(--gold-line); }
+.award-quiet {
+  justify-content: center;
+  background: radial-gradient(circle at 100% 0%, var(--gold-dim), transparent 60%), var(--surface);
+}
+
+.award-head { display: flex; gap: 1rem; align-items: flex-start; }
+.award-icon {
+  width: 40px;
+  height: 40px;
+  padding: 9px;
+  flex-shrink: 0;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-line);
+  border-radius: 10px;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.award-date {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.25rem;
+}
+.award h3 {
+  font-family: var(--sans);
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: #fff;
+}
+.award-featured h3 { font-size: clamp(1.25rem, 2.6vw, 1.6rem); }
+.award-org { font-family: var(--mono); font-size: 0.74rem; color: var(--text-muted); margin-top: 0.35rem; }
+.award-desc { font-size: 0.9rem; color: var(--text-muted); font-weight: 300; line-height: 1.7; }
+.award-featured .award-desc { max-width: 760px; color: var(--text); }
+
+/* photos (Part B) reuse the existing .shot + lightbox styles */
+.award-shots { display: flex; gap: 14px; align-items: flex-start; }
+.award-shots .shot { flex: var(--ar, 1.5) 1 0; min-width: 0; }
+.award-media { margin-top: auto; display: flex; justify-content: center; }
+.shot.single button { display: inline-block; width: auto; max-width: 100%; }
+.shot.single img { width: auto; max-width: 100%; max-height: 440px; height: auto; }
+.award .shot button:hover { border-color: var(--gold); }
+
+@media (max-width: 760px) {
+  .awards { grid-template-columns: 1fr; }
+  .award, .award-featured { padding: 1.3rem; }
+  .award-shots { flex-direction: column; }
+  .award-shots .shot { flex: none; width: 100%; max-width: 480px; margin-inline: auto; }
+}
+
 /* ── ACCESSIBILITY ── */
 :focus-visible {
   outline: 2px solid var(--accent);
@@ -1214,6 +1296,9 @@ input:focus-visible, textarea:focus-visible {
       <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></symbol>
       <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></symbol>
       <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+      <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></symbol>
+      <symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/><path d="M22 10v6"/></symbol>
+      <symbol id="i-present" viewBox="0 0 24 24"><path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="M7 21l5-5 5 5"/></symbol>
     </defs>
   </svg>
 
@@ -1294,6 +1379,7 @@ input:focus-visible, textarea:focus-visible {
   <a href="#skills">skills</a>
   <a href="#resume">resume</a>
   <a href="#education">education</a>
+  <a href="#honors">honors</a>
   <a href="#archive">archive</a>
   <a href="#contact">contact</a>
 </nav>
@@ -1552,7 +1638,7 @@ input:focus-visible, textarea:focus-visible {
   </section>
 
   <section id="data-science">
-    <div class="section-label">03 // projects</div>
+    <div class="section-label">04 // projects</div>
     <h2>Data Science &amp; Analytics</h2>
     <p class="section-intro">Machine learning, statistical analysis, research, business intelligence, and data-driven decision making.</p>
 
@@ -1612,7 +1698,7 @@ input:focus-visible, textarea:focus-visible {
   </section>
 
   <section id="technology">
-    <div class="section-label">04 // projects</div>
+    <div class="section-label">05 // projects</div>
     <h2>Technology &amp; Product Development</h2>
     <p class="section-intro">Software engineering, systems development, product design, user experience, and technical problem solving.</p>
 
@@ -1662,7 +1748,7 @@ input:focus-visible, textarea:focus-visible {
   </section>
 
   <section id="skills">
-    <div class="section-label">05 // skills</div>
+    <div class="section-label">06 // skills</div>
     <h2>Technical Skills</h2>
     <div class="skill-groups">
 
@@ -1713,7 +1799,7 @@ input:focus-visible, textarea:focus-visible {
     </section>
 
   <section id="resume">
-    <div class="section-label">06 // resume</div>
+    <div class="section-label">07 // resume</div>
     <h2>Resume</h2>
     <div class="resume-card">
       <div class="resume-info">
@@ -1728,7 +1814,7 @@ input:focus-visible, textarea:focus-visible {
   </section>
 
   <section id="education">
-    <div class="section-label">07 // education</div>
+    <div class="section-label">08 // education</div>
     <h2>Education</h2>
     <div class="edu-card">
       <div class="school">Chapman University</div>
@@ -1748,8 +1834,59 @@ input:focus-visible, textarea:focus-visible {
     </div>
   </section>
 
+  <section id="honors">
+    <div class="section-label">09 // honors</div>
+    <h2>Honors &amp; Recognition</h2>
+    <p class="section-intro">Academic excellence, research achievement, and leadership throughout my academic journey.</p>
+
+    <div class="awards">
+
+      <!-- AWARD 1: OUTSTANDING SENIOR (featured, two photos in Part B) -->
+      <article class="award award-featured" aria-labelledby="aw-senior">
+        <div class="award-head">
+          <svg class="award-icon" aria-hidden="true"><use href="#i-award"/></svg>
+          <div>
+            <span class="award-date">May 2026</span>
+            <h3 id="aw-senior">Fowler School of Engineering Outstanding Senior Award – Data Science</h3>
+            <p class="award-org">Chapman University – Fowler School of Engineering</p>
+          </div>
+        </div>
+        <p class="award-desc">Recognized as an outstanding graduating senior in Data Science for exceptional academic achievement, research contributions, leadership, and mentorship within Chapman University's Fowler School of Engineering.</p>
+        <!-- PART B: paste the two-photo block here -->
+      </article>
+
+      <!-- AWARD 2: PRESIDENTIAL SCHOLARSHIP (text only, no images) -->
+      <article class="award award-quiet" aria-labelledby="aw-presidential">
+        <div class="award-head">
+          <svg class="award-icon" aria-hidden="true"><use href="#i-cap"/></svg>
+          <div>
+            <span class="award-date">March 2022</span>
+            <h3 id="aw-presidential">Presidential Scholarship</h3>
+            <p class="award-org">Chapman University</p>
+          </div>
+        </div>
+        <p class="award-desc">Awarded a full-tuition, merit-based scholarship recognizing outstanding academic achievement, leadership potential, and community engagement.</p>
+      </article>
+
+      <!-- AWARD 3: PROGRAM HONORS (one photo in Part B) -->
+      <article class="award" aria-labelledby="aw-honors">
+        <div class="award-head">
+          <svg class="award-icon" aria-hidden="true"><use href="#i-present"/></svg>
+          <div>
+            <span class="award-date">May 2026</span>
+            <h3 id="aw-honors">Fowler School of Engineering Program Honors Recognition Award</h3>
+            <p class="award-org">Chapman University – Fowler School of Engineering</p>
+          </div>
+        </div>
+        <p class="award-desc">Earned program honors for achieving a GPA above 3.5, completing an independent research project, and presenting research findings at Chapman University's Student Scholar Symposium.</p>
+        <!-- PART B: paste the one-photo block here -->
+      </article>
+
+    </div>
+  </section>
+
   <section id="archive">
-    <div class="section-label">08 // archive</div>
+    <div class="section-label">10 // archive</div>
     <h2>Additional projects</h2>
     <details>
       <summary>Show all projects</summary>
@@ -1858,7 +1995,7 @@ input:focus-visible, textarea:focus-visible {
   </section>
 
   <section id="contact">
-    <div class="section-label">09 // contact</div>
+    <div class="section-label">11 // contact</div>
     <h2>Contact</h2>
 
     <div class="contact-grid">
