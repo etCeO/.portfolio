@@ -1162,7 +1162,7 @@ header { animation: fadeIn 0.7s ease forwards; }
 }
 
 /* ── HONORS & RECOGNITION ── */
-.awards { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.awards { display: grid; gap: 1.2rem; }
 .award {
   position: relative;
   overflow: hidden;
@@ -1185,7 +1185,6 @@ header { animation: fadeIn 0.7s ease forwards; }
 }
 .award-featured { grid-column: 1 / -1; padding: 2rem; border-color: var(--gold-line); }
 .award-quiet {
-  justify-content: center;
   background: radial-gradient(circle at 100% 0%, var(--gold-dim), transparent 60%), var(--surface);
 }
 
@@ -1233,11 +1232,30 @@ header { animation: fadeIn 0.7s ease forwards; }
 .shot.single img { width: auto; max-width: 100%; max-height: 440px; height: auto; }
 .award .shot button:hover { border-color: var(--gold); }
 
+/* horizontal variants: no card has to match another card's height */
+.award-split {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 1.6rem 2rem;
+  align-items: center;
+}
+.award-text { display: flex; flex-direction: column; gap: 1rem; }
+.award-split .award-media { margin-top: 0; }
+.award-split .shot.single img { max-height: 360px; }
+
+.award-strip {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 1rem 2.5rem;
+  align-items: center;
+}
+
 @media (max-width: 760px) {
   .awards { grid-template-columns: 1fr; }
   .award, .award-featured { padding: 1.3rem; }
   .award-shots { flex-direction: column; }
   .award-shots .shot { flex: none; width: 100%; max-width: 480px; margin-inline: auto; }
+  .award-split, .award-strip { grid-template-columns: 1fr; }
 }
 
 /* ── ACCESSIBILITY ── */
@@ -1852,24 +1870,23 @@ input:focus-visible, textarea:focus-visible {
           </div>
         </div>
         <p class="award-desc">Recognized as an outstanding graduating senior in Data Science for exceptional academic achievement, research contributions, leadership, and mentorship within Chapman University's Fowler School of Engineering.</p>
-        <!-- PART B: paste the two-photo block here -->
-      </article>
-
-      <!-- AWARD 2: PRESIDENTIAL SCHOLARSHIP (text only, no images) -->
-      <article class="award award-quiet" aria-labelledby="aw-presidential">
-        <div class="award-head">
-          <svg class="award-icon" aria-hidden="true"><use href="#i-cap"/></svg>
-          <div>
-            <span class="award-date">March 2022</span>
-            <h3 id="aw-presidential">Presidential Scholarship</h3>
-            <p class="award-org">Chapman University</p>
-          </div>
-        </div>
-        <p class="award-desc">Awarded a full-tuition, merit-based scholarship recognizing outstanding academic achievement, leadership potential, and community engagement.</p>
+        <div class="award-shots">
+          <figure class="shot" style="--ar:1.5">
+            <button type="button" aria-label="Enlarge photo: Outstanding Senior Award recognition">
+              <img src="images/award-senior-1.jpg" alt="Photograph from the Fowler School of Engineering Outstanding Senior Award recognition" width="1600" height="1067" loading="lazy" decoding="async">
+            </button>
+          </figure>
+          <figure class="shot" style="--ar:1.5">
+            <button type="button" aria-label="Enlarge photo: Outstanding Senior Award documentation">
+              <img src="images/award-senior-2.jpg" alt="Second photograph from the Outstanding Senior Award recognition" width="1600" height="1067" loading="lazy" decoding="async">
+            </button>
+          </figure>
+        </div>      
       </article>
 
       <!-- AWARD 3: PROGRAM HONORS (one photo in Part B) -->
-      <article class="award" aria-labelledby="aw-honors">
+      <article class="award award-split" aria-labelledby="aw-honors">
+        <div class="award-text">
         <div class="award-head">
           <svg class="award-icon" aria-hidden="true"><use href="#i-present"/></svg>
           <div>
@@ -1879,8 +1896,28 @@ input:focus-visible, textarea:focus-visible {
           </div>
         </div>
         <p class="award-desc">Earned program honors for achieving a GPA above 3.5, completing an independent research project, and presenting research findings at Chapman University's Student Scholar Symposium.</p>
-        <!-- PART B: paste the one-photo block here -->
+      </div>
+        <div class="award-media">
+          <figure class="shot single">
+            <button type="button" aria-label="Enlarge photo: Student Scholar Symposium research presentation">
+              <img src="images/award-honors.jpg" alt="Research poster presented at Chapman University's Student Scholar Symposium" width="1600" height="1067" loading="lazy" decoding="async">
+            </button>
+          </figure>
+        </div>      
       </article>
+
+            <!-- AWARD 2: PRESIDENTIAL SCHOLARSHIP (text only, no images) -->
+            <article class="award award-quiet award-strip" aria-labelledby="aw-presidential">
+              <div class="award-head">
+                <svg class="award-icon" aria-hidden="true"><use href="#i-cap"/></svg>
+                <div>
+                  <span class="award-date">March 2022</span>
+                  <h3 id="aw-presidential">Presidential Scholarship</h3>
+                  <p class="award-org">Chapman University</p>
+                </div>
+              </div>
+              <p class="award-desc">Awarded a full-tuition, merit-based scholarship recognizing outstanding academic achievement, leadership potential, and community engagement.</p>
+            </article>      
 
     </div>
   </section>
